@@ -1,0 +1,15 @@
+<resources>
+
+    <color name="blue500">#2196f3</color>
+    <color name="blue900">#0d47a1</color>
+    <color name="amberA700">#ffab00</color>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/blue500</item>
+        <item name="colorPrimaryDark">@color/blue900</item>
+        <item name="colorAccent">@color/amberA700</item>
+        <item name="android:textColorPrimary">@drawable/text_color</item>
+        <item name="android:textColorSecondary">@color/grey</item>
+    </style>
+
+</resources>

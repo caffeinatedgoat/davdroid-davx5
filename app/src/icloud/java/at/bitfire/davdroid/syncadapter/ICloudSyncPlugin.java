@@ -22,6 +22,7 @@ import at.bitfire.davdroid.App;
 import at.bitfire.davdroid.BuildConfig;
 import at.bitfire.davdroid.Constants;
 import at.bitfire.davdroid.R;
+import at.bitfire.davdroid.SubscriptionManager;
 import at.bitfire.davdroid.ui.SubscriptionActivity;
 
 public class ICloudSyncPlugin implements ISyncPlugin {
@@ -66,6 +67,12 @@ public class ICloudSyncPlugin implements ISyncPlugin {
                 }
         }
 
+        SubscriptionManager subscription = new SubscriptionManager(context, billingService);
+        if (subscription.inTrialPeriod()) {
+            App.log.info("Running as free trial");
+            return true;
+        }
+
         // check for license / bought products
         try {
             Bundle subs = billingService.getPurchases(3, BuildConfig.APPLICATION_ID, "subs", null);
@@ -76,10 +83,8 @@ public class ICloudSyncPlugin implements ISyncPlugin {
                 for (String sku : skus)
                     App.log.info("   - purchased product: " + sku);
 
-                skus.clear();   // TODO
                 if (skus.isEmpty()) {
                     // no subscription found
-
                     Notification notify = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.ic_account_circle_white)
                             .setContentTitle(context.getString(R.string.subscription_notification_title))

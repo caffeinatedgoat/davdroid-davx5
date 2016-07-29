@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- common strings -->
+    <string name="app_name">MultiSync for Cloud</string>
+    <string name="account_type">at.bitfire.cloudsync</string>
+
+    <string name="login_app_title_short">MultiSync</string>
+    <string name="login_runs_with_icloud">runs with iCloud®</string>
+    <string name="login_trademark_notice">This app is not affiliated to, nor has it been authorized, sponsored or otherwise approved by Apple Inc. Apple® and iCloud® are registered trademarks of Apple Inc.</string>
+
+    <string name="subscription_notification_title">Licensing required</string>
+    <string name="subscription_notification_text">MultiSync for Clouds needs a valid license to work.</string>
+
+</resources>

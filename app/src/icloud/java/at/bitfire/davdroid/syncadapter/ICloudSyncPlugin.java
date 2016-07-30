@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import at.bitfire.davdroid.App;
+import at.bitfire.davdroid.BillingException;
 import at.bitfire.davdroid.BuildConfig;
 import at.bitfire.davdroid.Constants;
 import at.bitfire.davdroid.R;
@@ -67,44 +68,14 @@ public class ICloudSyncPlugin implements ISyncPlugin {
                 }
         }
 
-        SubscriptionManager subscription = new SubscriptionManager(context, billingService);
-        if (subscription.inTrialPeriod()) {
-            App.log.info("Running as free trial");
-            return true;
-        }
-
-        // check for license / bought products
         try {
-            Bundle subs = billingService.getPurchases(3, BuildConfig.APPLICATION_ID, "subs", null);
-            int response = subs.getInt("RESPONSE_CODE");
-            if (response == 0) {
-                ArrayList<String> skus = subs.getStringArrayList("INAPP_PURCHASE_ITEM_LIST");
-                App.log.info(skus.size() + " purchased product(s)");
-                for (String sku : skus)
-                    App.log.info("   - purchased product: " + sku);
-
-                if (skus.isEmpty()) {
-                    // no subscription found
-                    Notification notify = new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_account_circle_white)
-                            .setContentTitle(context.getString(R.string.subscription_notification_title))
-                            .setContentText(context.getString(R.string.subscription_notification_text))
-                            .setCategory(NotificationCompat.CATEGORY_STATUS)
-                            .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, SubscriptionActivity.class), PendingIntent.FLAG_UPDATE_CURRENT))
-                            .setLocalOnly(true)
-                            .build();
-                    NotificationManager nm = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                    nm.notify(Constants.NOTIFICATION_SUBSCRIPTION, notify);
-
-                    return false;
-                }
-
-            } else {
-                App.log.severe("Couldn't query Google Play subscriptions: response code " + response);
-                return false;
+            SubscriptionManager subscription = new SubscriptionManager(context, billingService);
+            if (subscription.isValid()) {
+                App.log.info("Valid license found: " + subscription.info.status);
+                return true;
             }
-        } catch (RemoteException e) {
-            App.log.log(Level.SEVERE, "Couldn't query Google Play subscriptions", e);
+        } catch(BillingException e) {
+            App.log.log(Level.WARNING, "Couldn't determine subscription state", e);
             return false;
         }
 

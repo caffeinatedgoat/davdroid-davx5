@@ -5,11 +5,25 @@
     <string name="app_name">MultiSync for Cloud</string>
     <string name="account_type">at.bitfire.cloudsync</string>
 
+    <string name="navigation_drawer_about">About</string>
+    <string name="navigation_drawer_license_status">License status</string>
+
     <string name="login_app_title_short">MultiSync</string>
     <string name="login_runs_with_icloud">runs with iCloud®</string>
     <string name="login_trademark_notice">This app is not affiliated to, nor has it been authorized, sponsored or otherwise approved by Apple Inc. Apple® and iCloud® are registered trademarks of Apple Inc.</string>
 
     <string name="subscription_notification_title">Licensing required</string>
     <string name="subscription_notification_text">MultiSync for Clouds needs a valid license to work.</string>
+
+    <string name="subscription_management">License management</string>
+    <string name="subscription_management_manage">Manage in Google Play</string>
+    <string name="subscription_management_your_license">Your license</string>
+    <string name="subscription_management_status_trial"><![CDATA[Status: <b><font color="#ffab00">trial</font></b> until %s]]></string>
+    <string name="subscription_management_status_expired"><![CDATA[Status: <b><font color="#ff5722">expired</font></b> (no license found)]]></string>
+    <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">active</b> since %s (thank you!)]]></string>
+    <string name="subscription_management_get_license">Get a license</string>
+    <string name="subscription_management_product_title_price"><![CDATA[%1$s … monthly <b>%2$s</b>]]></string>
+    <string name="subscription_management_get_in_google_play">Get in Google Play</string>
+    <string name="subscription_management_play_connection_error">Couldn\'t connect to Google Play, please try again later.</string>
 
 </resources>

@@ -4,11 +4,12 @@
 
 	<uses-permission android:name="com.android.vending.BILLING" />
 
-    <application>
+    <application android:theme="@style/AppTheme">
 
         <activity
             android:name=".ui.SubscriptionActivity"
-            android:label="Subscription management"
+            android:parentActivityName=".ui.AccountsActivity"
+            android:label="@string/subscription_management"
             android:exported="true">
         </activity>
 

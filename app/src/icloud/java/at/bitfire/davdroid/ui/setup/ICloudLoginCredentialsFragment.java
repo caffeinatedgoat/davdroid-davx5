@@ -61,7 +61,7 @@ public class ICloudLoginCredentialsFragment extends Fragment {
             valid = false;
         }
 
-        return valid ? new LoginCredentials(URI.create("https://icloud.com/"), userName, password, true) : null;
+        return valid ? new LoginCredentials(URI.create("https://icloud.com/"), userName, password) : null;
     }
 
 

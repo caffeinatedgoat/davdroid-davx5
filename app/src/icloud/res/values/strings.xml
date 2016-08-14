@@ -5,6 +5,7 @@
     <string name="app_name">MultiSync for Cloud</string>
     <string name="account_type">at.bitfire.cloudsync</string>
 
+    <string name="navigation_drawer_subtitle">runs with iCloud®</string>
     <string name="navigation_drawer_about">About</string>
     <string name="navigation_drawer_license_status">License status</string>
 

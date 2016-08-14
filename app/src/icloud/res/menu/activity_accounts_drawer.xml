@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/nav_app_license"
-        android:icon="@drawable/ic_settings_dark"
+        android:icon="@drawable/ic_attach_money_dark"
         android:title="@string/navigation_drawer_license_status"/>
     <item
         android:id="@+id/nav_app_settings"
@@ -22,16 +22,6 @@
         android:id="@+id/nav_about"
         android:icon="@drawable/ic_info_dark"
         android:title="@string/navigation_drawer_about"/>
-
-    <item android:title="@string/navigation_drawer_news_updates">
-        <menu>
-            <item
-                android:id="@+id/nav_twitter"
-                android:icon="@drawable/twitter"
-                android:title="\@davdroidapp"
-                tools:ignore="HardcodedText"/>
-        </menu>
-    </item>
 
     <item android:title="@string/navigation_drawer_external_links">
         <menu>

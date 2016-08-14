@@ -26,74 +26,81 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/subscription_management_your_license"/>
 
-            <TextView
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminate="true"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
                 android:id="@+id/license_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="?android:attr/textAppearanceMedium"
                 tools:text="Status: XXX"/>
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/get_license"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="8dp"
+            app:contentPadding="12dp">
+
             <LinearLayout
-                android:id="@+id/get_license"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/product_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    style="@style/TextView.Heading"
-                    android:text="@string/subscription_management_get_license"/>
+                    style="?android:attr/textAppearanceLarge"
+                    tools:text="Product title" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/product_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    style="?android:attr/textAppearanceMedium"
+                    tools:text="Product description" />
 
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:checked="true"/>
+                <TextView
+                    android:id="@+id/product_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    style="?android:attr/textAppearanceMedium"
+                    android:text="@string/subscription_management_product_details"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/product_title"
-                            style="?android:attr/textAppearanceMedium"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:text="Product title" />
-
-                        <TextView
-                            android:id="@+id/product_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:text="Product description" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/textAppearanceLarge"
+                    tools:text="monthly … $ 0,39"/>
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/get_in_google_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="20sp"
                     app:backgroundTint="@color/blue500"
                     android:textColor="@color/white"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
+                    android:padding="12dp"
                     android:text="@string/subscription_management_get_in_google_play"/>
 
             </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

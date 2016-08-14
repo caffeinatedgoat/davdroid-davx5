@@ -5,17 +5,52 @@
     <string name="app_name">MultiSync for Cloud</string>
     <string name="account_type">at.bitfire.cloudsync</string>
 
-    <string name="navigation_drawer_subtitle">runs with iCloud®</string>
-    <string name="navigation_drawer_about">About</string>
-    <string name="navigation_drawer_license_status">License status</string>
+    <!-- startup dialogs -->
+    <string name="startup_battery_optimization_message">Android may disable/reduce synchronization with iCloud® after a few days. To prevent this, turn off battery optimization.</string>
+    <string name="startup_battery_optimization_disable">Turn off for MultiSync</string>
+    <string name="startup_opentasks_not_installed_message">The OpenTasks app is not available, so MultiSync for Cloud won\'t be able to synchronize iCloud® reminders.</string>
+    <string name="startup_opentasks_reinstall_davdroid">After installing OpenTasks, you have to RE-INSTALL MultiSync for Cloud and add your accounts again (Android bug).</string>
 
+    <!-- global settings -->
+    <string name="logging_davdroid_file_logging">MultiSync file logging</string>
+
+    <!-- AccountsActivity -->
+    <string name="navigation_drawer_subtitle">runs with iCloud®</string>
+    <string name="navigation_drawer_license_status">License status</string>
+    <string name="navigation_drawer_about">About MultiSync</string>
+
+    <string name="account_list_empty">MultiSync for Cloud\n\nContacts · Calendar · Reminders\n\nYou can add your iCloud® account now.</string>
+
+    <!-- AccountActivity -->
+    <string name="account_carddav">Contacts</string>
+    <string name="account_caldav">Calendars · Tasks</string>
+
+    <!-- PermissionsActivity -->
+    <string name="permissions_title">MultiSync permissions</string>
+    <string name="permissions_calendar_details">To synchronize iCloud® calendars with your local calendars, MultiSync needs to access your calendars.</string>
+    <string name="permissions_contacts_details">To synchronize iCloud® contacts with your local contacts, MultiSync needs to access your contacts.</string>
+    <string name="permissions_opentasks_details">To synchronize iCloud® reminders with your local task lists, MultiSync needs to access OpenTasks.</string>
+
+    <!-- AddAccountActivity -->
     <string name="login_app_title_short">MultiSync</string>
     <string name="login_runs_with_icloud">runs with iCloud®</string>
+    <string name="login_user_name">Apple® ID</string>
     <string name="login_two_factor_authentication">If you use two-factor authentication, use your app password here instead of your account password.</string>
     <string name="login_trademark_notice">This app is not affiliated to, nor has it been authorized, sponsored or otherwise approved by Apple Inc. Apple® and iCloud® are registered trademarks of Apple Inc.</string>
+    <string name="login_no_caldav_carddav">Apple ID/password wrong, or network problems. (Did you use your generated app password in case of two-factor authentication?)</string>
 
+    <!-- AccountSettingsActivity -->
+    <string name="settings_manage_calendar_colors_on">Calendar colors are managed by MultiSync</string>
+    <string name="settings_manage_calendar_colors_off">Calendar colors are not set by MultiSync</string>
+    <string name="settings_version_update">MultiSync version update</string>
+    <string name="settings_version_update_install_hint">Problems? Uninstall MultiSync, then re-install.</string>
+
+    <!-- sync errors and DebugInfoActivity -->
+    <string name="sync_error_permissions">MultiSync permissions</string>
+
+    <!-- *** icloud only *** -->
     <string name="subscription_notification_title">Licensing required</string>
-    <string name="subscription_notification_text">MultiSync for Clouds needs a valid license to work.</string>
+    <string name="subscription_notification_text">MultiSync for Cloud needs a valid license to work.</string>
 
     <string name="subscription_management">License management</string>
     <string name="subscription_management_manage">Manage in Google Play</string>
@@ -23,8 +58,8 @@
     <string name="subscription_management_status_trial"><![CDATA[Status: <b><font color="#ffab00">trial</font></b> until %s]]></string>
     <string name="subscription_management_status_expired"><![CDATA[Status: <b><font color="#ff5722">expired</font></b> (no license found)]]></string>
     <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">active</b> since %s (thank you!)]]></string>
-    <string name="subscription_management_get_license">Get a license</string>
-    <string name="subscription_management_product_title_price"><![CDATA[%1$s … monthly <b>%2$s</b>]]></string>
+    <string name="subscription_management_product_details">✓ unlimited 2-way-synchronization\n✓ iCloud® Contacts\n✓ iCloud® Calendar\n✓ iCloud® Reminders\n✓ seamless integration with Android device\n✓ secure purchase using Google Play\n✓ monthly subscription, terminable at any time\n✓ withdrawal possible within 7 days after purchase</string>
+    <string name="subscription_management_product_price">monthly … %s</string>
     <string name="subscription_management_get_in_google_play">Get in Google Play</string>
     <string name="subscription_management_play_connection_error">Couldn\'t connect to Google Play, please try again later.</string>
 

@@ -12,6 +12,9 @@
         <item name="android:textColorSecondary">@color/grey</item>
     </style>
 
+    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
     <style name="TextView.HeadingLarge" parent="AppTheme">
         <item name="android:textSize">48sp</item>
         <item name="android:textColor">@android:color/black</item>

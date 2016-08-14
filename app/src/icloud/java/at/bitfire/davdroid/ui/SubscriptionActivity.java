@@ -107,8 +107,10 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
                     JSONObject product = products.get(0);
 
                     tv = (TextView)findViewById(R.id.product_title);
-                    tv.setText(Html.fromHtml(getString(R.string.subscription_management_product_title_price,
-                            product.getString("title"), product.getString("price"))));
+                    tv.setText(product.getString("title"));
+
+                    tv = (TextView)findViewById(R.id.product_price);
+                    tv.setText(getString(R.string.subscription_management_product_price, product.getString("price")));
 
                     tv = (TextView)findViewById(R.id.product_description);
                     tv.setText(product.getString("description"));
@@ -121,6 +123,8 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
             App.log.log(Level.WARNING, "Couldn't connect to Google Play", e);
             Snackbar.make(getWindow().getDecorView(), R.string.subscription_management_play_connection_error, Snackbar.LENGTH_INDEFINITE).show();
         }
+
+        findViewById(R.id.progress).setVisibility(View.GONE);
     }
 
     @Override

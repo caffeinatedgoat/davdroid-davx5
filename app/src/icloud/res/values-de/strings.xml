@@ -4,4 +4,62 @@
     <!-- common strings -->
     <string name="app_name">MultiSync for Cloud</string>
 
+    <!-- startup dialogs -->
+    <string name="startup_battery_optimization_message">Android kann die iCloud®-Synchronisierung in ein paar Tagen reduzieren/deaktivieren. Um dies zu verhindern, muss die Akku-Leistungsoptimierung deaktiviert werden.</string>
+    <string name="startup_battery_optimization_disable">Für MultiSync deaktivieren</string>
+    <string name="startup_opentasks_not_installed_message">Die OpenTasks-App ist nicht verfügbar; Aufgabenlisten können also nicht synchronisiert werden.</string>
+    <string name="startup_opentasks_reinstall_davdroid">Nach der Installation von OpenTasks muss MultiSync NEU INSTALLIERT und die Konten neu hinzugefügt werden (Android-Bug).</string>
+
+    <!-- global settings -->
+    <string name="logging_davdroid_file_logging">MultiSync Datei-Protokollierung</string>
+
+    <!-- AccountsActivity -->
+    <string name="navigation_drawer_subtitle">für iCloud®</string>
+    <string name="navigation_drawer_license_status">Lizenz-Status</string>
+    <string name="navigation_drawer_about">Über MultiSync</string>
+
+    <string name="account_list_empty">MultiSync for Cloud\n\nKontakte · Kalender · Erinnerungen\n\nSie können Ihr iCloud®-Konto nun hinzufügen.</string>
+
+    <!-- AccountActivity -->
+    <string name="account_carddav">Kontakte</string>
+    <string name="account_caldav">Kalender · Erinnerungen</string>
+
+    <!-- PermissionsActivity -->
+    <string name="permissions_title">MultiSync-Berechtigungen</string>
+    <string name="permissions_calendar_details">Um iCloud®-Kalender mit lokalen Kalendern abzugleichen, benötigt MultiSync Kalender-Zugriffsrechte.</string>
+    <string name="permissions_contacts_details">Um iCloud®-Kontakte mit dem lokalen Adressbuch abzugleichen, benötigt MultiSync Adressbuch-Zugriffsrechte.</string>
+    <string name="permissions_opentasks_details">Um iCloud®-Erinnerungen mit lokalen Aufgabenlisten abzugleichen, benötigt MultiSync Zugriffsrechte für OpenTasks.</string>
+
+    <!-- AddAccountActivity -->
+    <string name="login_app_title_short">MultiSync</string>
+    <string name="login_runs_with_icloud">kompatibel mit iCloud®</string>
+    <string name="login_user_name">Apple®-ID</string>
+    <string name="login_two_factor_authentication">Zwei-Faktor-Authentifizierung: Verwenden Sie das generierte programmspezifische Passwort anstelle Ihres Konto-Passworts.</string>
+    <string name="login_trademark_notice">Diese App steht in keinerlei Verbindung zur Apple Inc und wurde von dieser auch nicht autorisiert, getestet oder sonstwie gefördert. Apple® und iCloud® sind eingetragene Warenzeichen der Apple Inc.</string>
+    <string name="login_no_caldav_carddav">Apple-ID/Passwort falsch oder Netzwerkprobleme. (Zwei-Faktor-Authentifizierung: Haben Sie das programmspezifische Passwort verwendet?)</string>
+
+    <!-- AccountSettingsActivity -->
+    <string name="settings_manage_calendar_colors_on">Kalenderfarben werden von MultiSync verwaltet</string>
+    <string name="settings_manage_calendar_colors_off">MultiSync setzt keine Kalenderfarben</string>
+    <string name="settings_version_update">Neue MultiSync-Version</string>
+    <string name="settings_version_update_install_hint">Probleme? MultiSync löschen und neu installieren.</string>
+
+    <!-- sync errors and DebugInfoActivity -->
+    <string name="sync_error_permissions">MultiSync-Berechtigungen</string>
+
+    <!-- *** icloud only *** -->
+    <string name="subscription_notification_title">Lizenz wird benötigt</string>
+    <string name="subscription_notification_text">MultiSync for Cloud benötigt eine gültige Lizenz.</string>
+
+    <string name="subscription_management">Lizenzverwaltung</string>
+    <string name="subscription_management_manage">In Google Play verwalten</string>
+    <string name="subscription_management_your_license">Ihre Lizenz</string>
+    <string name="subscription_management_status_trial"><![CDATA[Status: <b><font color="#ffab00">Demo</font></b> bis %s]]></string>
+    <string name="subscription_management_status_expired"><![CDATA[Status: <b><font color="#ff5722">abgelaufen</font></b> (keine Lizenz gefunden)]]></string>
+    <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">aktiv</b> seit %s (Danke!)]]></string>
+    <string name="subscription_management_product_details">✓ uneingeschränkte Synchronisierung in beide Richtungen\n✓ iCloud® Kontakte\n✓ iCloud® Kalender\n✓ iCloud® Erinnerungen\n✓ nahtlose Integration mit Android\n✓ Sicherer Kauf über Google Play\n✓ Monatliches Abo, jederzeit kündbar\n✓ Rücktritt innerhalb von 7 Tagen ohne Zahlung möglich</string>
+    <string name="subscription_management_product_price">monatlich … %s</string>
+    <string name="subscription_management_get_in_google_play">Über Google Play erwerben</string>
+    <string name="subscription_management_play_connection_error">Verbindung zu Google Play konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</string>
+
 </resources>

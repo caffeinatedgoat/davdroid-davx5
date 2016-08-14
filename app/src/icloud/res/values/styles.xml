@@ -5,24 +5,33 @@
     <color name="amberA700">#ffab00</color>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
         <item name="colorPrimary">@color/blue500</item>
         <item name="colorPrimaryDark">@color/blue900</item>
         <item name="colorAccent">@color/amberA700</item>
         <item name="android:textColorPrimary">@drawable/text_color</item>
         <item name="android:textColorSecondary">@color/grey</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
     <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
     </style>
 
-    <style name="TextView.HeadingLarge" parent="AppTheme">
-        <item name="android:textSize">48sp</item>
+
+    <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/blue900</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+
+    <style name="TextView.Heading" parent="AppTheme">
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>
 
-    <style name="TextView.Heading" parent="AppTheme">
-        <item name="android:textSize">22sp</item>
+    <style name="TextView.HeadingLarge" parent="AppTheme">
+        <item name="android:textSize">48sp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>

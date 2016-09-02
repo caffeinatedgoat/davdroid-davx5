@@ -10,7 +10,7 @@
         <item name="colorPrimaryDark">@color/blue900</item>
         <item name="colorAccent">@color/amberA700</item>
         <item name="android:textColorPrimary">@drawable/text_color</item>
-        <item name="android:textColorSecondary">@color/grey</item>
+        <item name="android:textColorSecondary">@color/grey700</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
@@ -20,7 +20,7 @@
 
     <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/blue900</item>
-        <item name="titleTextColor">@color/white</item>
+        <item name="titleTextColor">@android:color/white</item>
     </style>
 
 

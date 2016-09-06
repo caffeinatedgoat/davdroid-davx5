@@ -19,6 +19,9 @@ public class ICloudAccountsDrawerHandler implements IAccountsDrawerHandler {
             case R.id.nav_app_settings:
                 activity.startActivity(new Intent(activity, AppSettingsActivity.class));
                 break;
+            case R.id.nav_about:
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Constants.webUri));
+                break;
             case R.id.nav_website:
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, Constants.webUri));
                 break;

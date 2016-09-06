@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.NotificationCompat;
 
 import com.android.vending.billing.IInAppBillingService;
@@ -52,7 +53,7 @@ public class ICloudSyncPlugin implements ISyncPlugin {
         // connect to Google Play billing service
         Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
-        if (context.bindService(serviceIntent, billingServiceConnection, Context.BIND_AUTO_CREATE) == false) {
+        if (!context.bindService(serviceIntent, billingServiceConnection, Context.BIND_AUTO_CREATE)) {
             App.log.severe("Couldn't connect to Google Play billing service");
             return false;
         }
@@ -62,7 +63,7 @@ public class ICloudSyncPlugin implements ISyncPlugin {
             if (billingService == null)
                 try {
                     billingServiceLock.wait();
-                } catch (InterruptedException e) {
+                } catch(InterruptedException e) {
                     App.log.log(Level.SEVERE, "Couldn't wait for Google Play billing service", e);
                     return false;
                 }
@@ -76,10 +77,22 @@ public class ICloudSyncPlugin implements ISyncPlugin {
             }
         } catch(BillingException e) {
             App.log.log(Level.WARNING, "Couldn't determine subscription state", e);
-            return false;
         }
 
-        return true;
+        // no valid license found, show notificaion
+        Notification notify = new NotificationCompat.Builder(context)
+                .setLargeIcon(App.getLauncherBitmap(context))
+                .setSmallIcon(R.drawable.ic_account_circle_white)
+                .setContentTitle(context.getString(R.string.subscription_notification_title))
+                .setContentText(context.getString(R.string.subscription_notification_text))
+                .setCategory(NotificationCompat.CATEGORY_STATUS)
+                .setAutoCancel(true)
+                .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, SubscriptionActivity.class), PendingIntent.FLAG_UPDATE_CURRENT))
+                .build();
+        NotificationManagerCompat nm = NotificationManagerCompat.from(context);
+        nm.notify(Constants.NOTIFICATION_SUBSCRIPTION, notify);
+
+        return false;
     }
 
     @Override

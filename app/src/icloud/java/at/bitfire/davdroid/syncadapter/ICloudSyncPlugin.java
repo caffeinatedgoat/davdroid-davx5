@@ -79,7 +79,7 @@ public class ICloudSyncPlugin implements ISyncPlugin {
             App.log.log(Level.WARNING, "Couldn't determine subscription state", e);
         }
 
-        // no valid license found, show notificaion
+        // no valid license found, show notification
         Notification notify = new NotificationCompat.Builder(context)
                 .setLargeIcon(App.getLauncherBitmap(context))
                 .setSmallIcon(R.drawable.ic_account_circle_white)
@@ -97,7 +97,8 @@ public class ICloudSyncPlugin implements ISyncPlugin {
 
     @Override
     public void afterSync(@NonNull Context context) {
-        context.unbindService(billingServiceConnection);
+        if (billingService != null)
+            context.unbindService(billingServiceConnection);
     }
 
 }

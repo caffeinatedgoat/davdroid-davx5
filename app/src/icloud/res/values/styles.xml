@@ -1,8 +1,15 @@
 <resources>
 
+    <!-- colors -->
     <color name="blue500">#2196f3</color>
     <color name="blue900">#0d47a1</color>
     <color name="amberA700">#ffab00</color>
+
+    <!-- preference-v14 uses this color for categories text -->
+    <color name="preference_fallback_accent_color">@color/amberA700</color>
+
+
+    <!-- app theme -->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
@@ -18,11 +25,19 @@
     </style>
 
 
+    <!-- widgets -->
+
+    <style name="tablayout" parent="Base.Widget.Design.TabLayout">
+        <item name="android:background">@color/blue900</item>
+    </style>
+
     <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/blue900</item>
         <item name="titleTextColor">@android:color/white</item>
     </style>
 
+
+    <!-- text content -->
 
     <style name="TextView.Heading" parent="AppTheme">
         <item name="android:textSize">22sp</item>

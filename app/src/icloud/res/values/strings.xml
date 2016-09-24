@@ -58,8 +58,7 @@
     <string name="subscription_management_status_trial"><![CDATA[Status: <b><font color="#ffab00">trial</font></b> until %s]]></string>
     <string name="subscription_management_status_expired"><![CDATA[Status: <b><font color="#ff5722">expired</font></b> (no license found)]]></string>
     <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">active</b> since %s (thank you!)]]></string>
-    <string name="subscription_management_product_details">✓ unlimited 2-way-synchronization\n✓ iCloud® Contacts\n✓ iCloud® Calendar\n✓ iCloud® Reminders\n✓ seamless integration with Android device\n✓ secure purchase using Google Play\n✓ monthly subscription, terminable at any time\n✓ withdrawal possible within 7 days after purchase</string>
-    <string name="subscription_management_product_price">monthly … %s</string>
+    <string name="subscription_management_product_details">✓ unlimited 2-way-synchronization\n✓ iCloud® Contacts\n✓ iCloud® Calendar\n✓ iCloud® Reminders\n✓ seamless integration with Android device\n✓ secure purchase using Google Play\n✓ unlock once, use forever</string>
     <string name="subscription_management_get_in_google_play">Get in Google Play</string>
     <string name="subscription_management_play_connection_error">Couldn\'t connect to Google Play, please try again later.</string>
 

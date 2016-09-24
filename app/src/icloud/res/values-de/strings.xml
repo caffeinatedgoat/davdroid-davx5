@@ -57,8 +57,7 @@
     <string name="subscription_management_status_trial"><![CDATA[Status: <b><font color="#ffab00">Demo</font></b> bis %s]]></string>
     <string name="subscription_management_status_expired"><![CDATA[Status: <b><font color="#ff5722">abgelaufen</font></b> (keine Lizenz gefunden)]]></string>
     <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">aktiv</b> seit %s (Danke!)]]></string>
-    <string name="subscription_management_product_details">✓ uneingeschränkte Synchronisierung in beide Richtungen\n✓ iCloud® Kontakte\n✓ iCloud® Kalender\n✓ iCloud® Erinnerungen\n✓ nahtlose Integration mit Android\n✓ Sicherer Kauf über Google Play\n✓ Monatliches Abo, jederzeit kündbar\n✓ Rücktritt innerhalb von 7 Tagen ohne Zahlung möglich</string>
-    <string name="subscription_management_product_price">monatlich … %s</string>
+    <string name="subscription_management_product_details">✓ uneingeschränkte Synchronisierung in beide Richtungen\n✓ iCloud® Kontakte\n✓ iCloud® Kalender\n✓ iCloud® Erinnerungen\n✓ nahtlose Integration mit Android\n✓ sicherer Kauf über Google Play\n✓ Einmal-Zahlung</string>
     <string name="subscription_management_get_in_google_play">Über Google Play erwerben</string>
     <string name="subscription_management_play_connection_error">Verbindung zu Google Play konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</string>
 

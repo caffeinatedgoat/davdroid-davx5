@@ -22,8 +22,8 @@ public class SubscriptionManager {
 
     private static final int TRIAL_PERIOD = 7*24*3600*1000;
 
-    Context context;
-    IInAppBillingService billingService;
+    protected Context context;
+    protected IInAppBillingService billingService;
 
     public final SubscriptionInfo info = new SubscriptionInfo();
 
@@ -44,17 +44,10 @@ public class SubscriptionManager {
             App.log.log(Level.SEVERE, "Can't find local package", e);
         }
 
-        Bundle purchases = getPurchases();
-        for (String json : purchases.getStringArrayList("INAPP_PURCHASE_DATA_LIST"))
-            try {
-                JSONObject product = new JSONObject(json);
-                if (product.getInt("purchaseState") == 0 /* purchased */) {
-                    info.status = Status.ACTIVE;
-                    info.purchaseTime = product.getLong("purchaseTime");
-                }
-            } catch(JSONException e) {
-                throw new BillingException("Couldn't parse product details", e);
-            }
+        processPurchases("inapp");
+        if (info.status != Status.ACTIVE)
+            // legacy: check subscriptions, too
+            processPurchases("subs");
     }
 
     public boolean isValid() {
@@ -62,26 +55,37 @@ public class SubscriptionManager {
     }
 
 
-    public Bundle getPurchases() throws BillingException {
+    public void processPurchases(@NonNull String type) throws BillingException {
+        Bundle result = null;
         try {
-            Bundle result = billingService.getPurchases(3, BuildConfig.APPLICATION_ID, "subs", null);
+            result = billingService.getPurchases(3, BuildConfig.APPLICATION_ID, type, null);
             int code = result.getInt("RESPONSE_CODE");
             if (code != 0)
                 throw new BillingException("Couldn't get purchases: " + code);
-
-            return result;
         } catch(RemoteException e) {
             throw new BillingException("Couldn't get purchases", e);
         }
+
+        if (result != null)
+            for (String json : result.getStringArrayList("INAPP_PURCHASE_DATA_LIST"))
+                try {
+                    JSONObject product = new JSONObject(json);
+                    if (product.getInt("purchaseState") == 0 /* purchased */) {
+                        info.status = Status.ACTIVE;
+                        info.purchaseTime = product.getLong("purchaseTime");
+                    }
+                } catch(JSONException e) {
+                    throw new BillingException("Couldn't parse product details", e);
+                }
     }
 
-    public ArrayList<JSONObject> getSubscriptionDetails(String[] skus) throws BillingException {
+    public ArrayList<JSONObject> getProductDetails(String[] skus) throws BillingException {
         Bundle skuBundle = new Bundle();
         skuBundle.putStringArrayList("ITEM_ID_LIST", new ArrayList(Arrays.asList(skus)));
 
         Bundle result = null;
         try {
-            result = billingService.getSkuDetails(3, BuildConfig.APPLICATION_ID, "subs", skuBundle);
+            result = billingService.getSkuDetails(3, BuildConfig.APPLICATION_ID, "inapp", skuBundle);
         } catch (RemoteException e) {
             throw new BillingException("Couldn't get subscription details", e);
         }

@@ -39,7 +39,7 @@ import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo.Status;
 
 public class SubscriptionActivity extends AppCompatActivity implements ServiceConnection {
 
-    private final String[] SKU_LIST = { "unlimited.monthly" };
+    private final String[] SKU_LIST = { "unlimited.onetime1" };
 
     private IInAppBillingService billingService;
 
@@ -101,7 +101,7 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
             else if (subscription.info.status == Status.ACTIVE)
                 tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_active, df.format(new Date(subscription.info.purchaseTime)))));
 
-            ArrayList<JSONObject> products = subscription.getSubscriptionDetails(SKU_LIST);
+            ArrayList<JSONObject> products = subscription.getProductDetails(SKU_LIST);
             if (!products.isEmpty())
                 try {
                     JSONObject product = products.get(0);
@@ -110,7 +110,7 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
                     tv.setText(product.getString("title"));
 
                     tv = (TextView)findViewById(R.id.product_price);
-                    tv.setText(getString(R.string.subscription_management_product_price, product.getString("price")));
+                    tv.setText(product.getString("price"));
 
                     tv = (TextView)findViewById(R.id.product_description);
                     tv.setText(product.getString("description"));
@@ -141,7 +141,7 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
 
     public void buyLicenseInMarket() {
         try {
-            Bundle bundle = billingService.getBuyIntent(3, BuildConfig.APPLICATION_ID, SKU_LIST[0], "subs", null);
+            Bundle bundle = billingService.getBuyIntent(3, BuildConfig.APPLICATION_ID, SKU_LIST[0], "inapp", null);
             PendingIntent intent = bundle.getParcelable("BUY_INTENT");
             startIntentSender(intent.getIntentSender(), new Intent(), 0, 0, 0);
         } catch(RemoteException|IntentSender.SendIntentException e) {

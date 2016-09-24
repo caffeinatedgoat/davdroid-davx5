@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="?android:attr/textAppearanceLarge"
-                    tools:text="monthly … $ 0,39"/>
+                    tools:text="$ 4,49"/>
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/get_in_google_play"

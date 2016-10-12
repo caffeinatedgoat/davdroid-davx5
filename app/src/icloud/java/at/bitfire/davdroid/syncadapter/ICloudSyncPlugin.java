@@ -98,7 +98,11 @@ public class ICloudSyncPlugin implements ISyncPlugin {
     @Override
     public void afterSync(@NonNull Context context) {
         if (billingService != null)
-            context.unbindService(billingServiceConnection);
+            try {
+                context.unbindService(billingServiceConnection);
+            } catch(IllegalArgumentException e) {
+                App.log.log(Level.SEVERE, "Couldn't unbind Google Play service", e);
+            }
     }
 
 }

@@ -1,10 +1,13 @@
 package at.bitfire.davdroid.ui;
 
+import android.app.LoaderManager;
 import android.app.PendingIntent;
+import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.Loader;
 import android.content.ServiceConnection;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -35,13 +38,12 @@ import at.bitfire.davdroid.BillingException;
 import at.bitfire.davdroid.BuildConfig;
 import at.bitfire.davdroid.R;
 import at.bitfire.davdroid.SubscriptionManager;
+import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo;
 import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo.Status;
 
-public class SubscriptionActivity extends AppCompatActivity implements ServiceConnection {
+public class SubscriptionActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<SubscriptionActivity.BillingData> {
 
-    private final String[] SKU_LIST = { "unlimited.onetime1" };
-
-    private IInAppBillingService billingService;
+    PendingIntent buyIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,77 +61,14 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
                 buyLicenseInMarket();
             }
         });
+
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_subscription, menu);
         return true;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-        serviceIntent.setPackage("com.android.vending");
-        if (bindService(serviceIntent, this, Context.BIND_AUTO_CREATE) == false) {
-            App.log.severe("Couldn't connect to Google Play billing service");
-            finish();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unbindService(this);
-    }
-
-
-    @Override
-    public void onServiceConnected(ComponentName name, IBinder service) {
-        billingService = IInAppBillingService.Stub.asInterface(service);
-
-        try {
-            SubscriptionManager subscription = new SubscriptionManager(this, billingService);
-
-            DateFormat df = DateFormat.getDateTimeInstance();
-            TextView tv = (TextView)findViewById(R.id.license_status);
-            if (subscription.info.status == Status.TRIAL)
-                tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_trial, df.format(new Date(subscription.info.trialExpiration)))));
-            else if (subscription.info.status == Status.EXPIRED)
-                tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_expired)));
-            else if (subscription.info.status == Status.ACTIVE)
-                tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_active, df.format(new Date(subscription.info.purchaseTime)))));
-
-            ArrayList<JSONObject> products = subscription.getProductDetails(SKU_LIST);
-            if (!products.isEmpty())
-                try {
-                    JSONObject product = products.get(0);
-
-                    tv = (TextView)findViewById(R.id.product_title);
-                    tv.setText(product.getString("title"));
-
-                    tv = (TextView)findViewById(R.id.product_price);
-                    tv.setText(product.getString("price"));
-
-                    tv = (TextView)findViewById(R.id.product_description);
-                    tv.setText(product.getString("description"));
-                } catch(JSONException e) {
-                    throw new BillingException("Couldn't parse product details", e);
-                }
-
-            findViewById(R.id.get_license).setVisibility(subscription.info.status == Status.ACTIVE ? View.GONE : View.VISIBLE);
-        } catch(BillingException e) {
-            App.log.log(Level.WARNING, "Couldn't connect to Google Play", e);
-            Snackbar.make(getWindow().getDecorView(), R.string.subscription_management_play_connection_error, Snackbar.LENGTH_INDEFINITE).show();
-        }
-
-        findViewById(R.id.progress).setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName name) {
-        billingService = null;
     }
 
 
@@ -140,13 +79,132 @@ public class SubscriptionActivity extends AppCompatActivity implements ServiceCo
     }
 
     public void buyLicenseInMarket() {
-        try {
-            Bundle bundle = billingService.getBuyIntent(3, BuildConfig.APPLICATION_ID, SKU_LIST[0], "inapp", null);
-            PendingIntent intent = bundle.getParcelable("BUY_INTENT");
-            startIntentSender(intent.getIntentSender(), new Intent(), 0, 0, 0);
-        } catch(RemoteException|IntentSender.SendIntentException e) {
-            App.log.log(Level.SEVERE, "Couldn't start in-app billing intent", e);
+        if (buyIntent != null)
+            try {
+                startIntentSender(buyIntent.getIntentSender(), new Intent(), 0, 0, 0);
+            } catch(IntentSender.SendIntentException e) {
+                App.log.log(Level.SEVERE, "Couldn't start in-app billing intent", e);
+            }
+    }
+
+
+    @Override
+    public Loader<BillingData> onCreateLoader(int id, Bundle args) {
+        return new LicenseLoader(this);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<BillingData> loader, BillingData data) {
+        findViewById(R.id.progress).setVisibility(View.GONE);
+
+        if (data.info != null) {
+            DateFormat df = DateFormat.getDateTimeInstance();
+            TextView tv = (TextView)findViewById(R.id.license_status);
+            if (data.info.status == Status.TRIAL)
+                tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_trial, df.format(new Date(data.info.trialExpiration)))));
+            else if (data.info.status == Status.EXPIRED)
+                tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_expired)));
+            else if (data.info.status == Status.ACTIVE)
+                tv.setText(Html.fromHtml(getString(R.string.subscription_management_status_active, df.format(new Date(data.info.purchaseTime)))));
+
+            findViewById(R.id.get_license).setVisibility(data.info.status == SubscriptionInfo.Status.ACTIVE ? View.GONE : View.VISIBLE);
         }
+
+        if (data.productDetails != null && !data.productDetails.isEmpty())
+            try {
+                JSONObject product = data.productDetails.get(0);
+
+                TextView tv = (TextView)findViewById(R.id.product_title);
+                tv.setText(product.getString("title"));
+
+                tv = (TextView)findViewById(R.id.product_price);
+                tv.setText(product.getString("price"));
+
+                tv = (TextView)findViewById(R.id.product_description);
+                tv.setText(product.getString("description"));
+            } catch(JSONException e) {
+                App.log.log(Level.SEVERE, "Couldn't parse product details", e);
+            }
+        else
+            findViewById(R.id.get_license).setVisibility(View.GONE);
+
+        if (data.error != null)
+            Snackbar.make(findViewById(R.id.license_status), data.error, Snackbar.LENGTH_INDEFINITE).show();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<BillingData> loader) {
+        buyIntent = null;
+    }
+
+
+    static class BillingData {
+        SubscriptionInfo info;
+        ArrayList<JSONObject> productDetails;
+        PendingIntent buyIntent;
+
+        String error;
+    }
+
+    static class LicenseLoader extends AsyncTaskLoader<BillingData> implements ServiceConnection {
+
+        private final String[] SKU_LIST = { "unlimited.onetime1" };
+
+        private IInAppBillingService billingService;
+
+        public LicenseLoader(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onStartLoading() {
+            Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+            serviceIntent.setPackage("com.android.vending");
+            if (!getContext().bindService(serviceIntent, this, Context.BIND_AUTO_CREATE)) {
+                App.log.severe("Couldn't connect to Google Play billing service");
+
+                BillingData data = new BillingData();
+                data.error = getContext().getString(R.string.subscription_management_play_connection_error);
+                deliverResult(data);
+            }
+        }
+
+        @Override
+        protected void onStopLoading() {
+            getContext().unbindService(this);
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            billingService = IInAppBillingService.Stub.asInterface(service);
+            forceLoad();
+        }
+
+        @Override
+        public BillingData loadInBackground() {
+            BillingData data = new BillingData();
+            try {
+                SubscriptionManager subscription = new SubscriptionManager(getContext(), billingService);
+                data.info = subscription.info;
+
+                // fetch product details
+                data.productDetails = subscription.getProductDetails(SKU_LIST);
+
+                // get buy intent
+                Bundle bundle = billingService.getBuyIntent(3, BuildConfig.APPLICATION_ID, SKU_LIST[0], "inapp", null);
+                data.buyIntent = bundle.getParcelable("BUY_INTENT");
+            } catch(RemoteException|BillingException e) {
+                App.log.log(Level.WARNING, "Couldn't retrieve product data from Google Play", e);
+                data.error = getContext().getString(R.string.subscription_management_play_connection_error);
+            }
+            return data;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            billingService = null;
+        }
+
     }
 
 }

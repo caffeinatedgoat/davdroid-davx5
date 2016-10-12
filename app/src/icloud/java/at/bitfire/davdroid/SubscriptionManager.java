@@ -87,11 +87,11 @@ public class SubscriptionManager {
         try {
             result = billingService.getSkuDetails(3, BuildConfig.APPLICATION_ID, "inapp", skuBundle);
         } catch (RemoteException e) {
-            throw new BillingException("Couldn't get subscription details", e);
+            throw new BillingException("Couldn't get product details", e);
         }
         int code = result.getInt("RESPONSE_CODE");
         if (code != 0)
-            throw new BillingException("Couldn't get subscription details: " + code);
+            throw new BillingException("Couldn't get product details: " + code);
 
         ArrayList<String> response = result.getStringArrayList("DETAILS_LIST");
         final ArrayList<JSONObject> details = new ArrayList<>(response.size());

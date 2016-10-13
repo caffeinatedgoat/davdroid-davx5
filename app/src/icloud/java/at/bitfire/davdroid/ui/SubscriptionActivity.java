@@ -128,8 +128,17 @@ public class SubscriptionActivity extends AppCompatActivity implements LoaderMan
         else
             findViewById(R.id.get_license).setVisibility(View.GONE);
 
+        buyIntent = data.buyIntent;
+
         if (data.error != null)
-            Snackbar.make(findViewById(R.id.license_status), data.error, Snackbar.LENGTH_INDEFINITE).show();
+            Snackbar.make(findViewById(R.id.license_status), data.error, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.subscription_management_try_again, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getLoaderManager().restartLoader(0, null, SubscriptionActivity.this);
+                        }
+                    })
+                    .show();
     }
 
     @Override

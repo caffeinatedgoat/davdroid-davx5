@@ -60,6 +60,7 @@
     <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">active</b> since %s (thank you!)]]></string>
     <string name="subscription_management_product_details">✓ unlimited 2-way-synchronization\n✓ iCloud® Contacts\n✓ iCloud® Calendar\n✓ iCloud® Reminders\n✓ seamless integration with Android device\n✓ secure purchase using Google Play\n✓ unlock once, use forever</string>
     <string name="subscription_management_get_in_google_play">Get in Google Play</string>
-    <string name="subscription_management_play_connection_error">Couldn\'t connect to Google Play, please try again later.</string>
+    <string name="subscription_management_play_connection_error">Couldn\'t connect to Google Play</string>
+    <string name="subscription_management_try_again">Try again</string>
 
 </resources>

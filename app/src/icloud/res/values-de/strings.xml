@@ -59,6 +59,7 @@
     <string name="subscription_management_status_active"><![CDATA[Status: <b><font color="#8bc34a">aktiv</b> seit %s (Danke!)]]></string>
     <string name="subscription_management_product_details">✓ uneingeschränkte Synchronisierung in beide Richtungen\n✓ iCloud® Kontakte\n✓ iCloud® Kalender\n✓ iCloud® Erinnerungen\n✓ nahtlose Integration mit Android\n✓ sicherer Kauf über Google Play\n✓ Einmal-Zahlung</string>
     <string name="subscription_management_get_in_google_play">Über Google Play erwerben</string>
-    <string name="subscription_management_play_connection_error">Google Play konnte nicht abgefragt werden, bitte später noch einmal versuchen</string>
+    <string name="subscription_management_play_connection_error">Verbindung zu Google Play konnte nicht hergestellt werden</string>
+    <string name="subscription_management_try_again">Erneut versuchen</string>
 
 </resources>

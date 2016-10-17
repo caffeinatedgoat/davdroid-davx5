@@ -46,6 +46,7 @@
     <string name="settings_version_update_install_hint">Problems? Uninstall MultiSync, then re-install.</string>
 
     <!-- sync errors and DebugInfoActivity -->
+    <string name="authority_log_provider">at.bitfire.cloudsync.log</string>
     <string name="sync_error_permissions">MultiSync permissions</string>
 
     <!-- *** icloud only *** -->

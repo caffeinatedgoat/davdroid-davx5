@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- colors -->
+    <color name="blue500">#2196f3</color>
+    <color name="blue900">#0d47a1</color>
+    <color name="amberA700">#ffab00</color>
+
+    <color name="soldupe_violet">#745bca</color>
+    <color name="soldupe_green">#317433</color>
+    <color name="soldupe_lightgreen">#449d44</color>
+
+    <!-- preference-v14 uses this color for categories text -->
+    <color name="preference_fallback_accent_color">@color/amberA700</color>
+
+
+    <!-- app theme -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
+        <item name="colorPrimary">@color/soldupe_lightgreen</item>
+        <item name="colorPrimaryDark">@color/soldupe_violet</item>
+        <item name="colorAccent">@color/amberA700</item>
+        <item name="android:textColorPrimary">@drawable/text_color</item>
+        <item name="android:textColorSecondary">@color/grey700</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
+
+    <!-- widgets -->
+
+    <style name="tablayout" parent="Base.Widget.Design.TabLayout">
+        <item name="android:background">@color/blue900</item>
+    </style>
+
+    <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/blue900</item>
+        <item name="titleTextColor">@android:color/white</item>
+    </style>
+
+
+    <!-- text content -->
+
+    <style name="TextView.Heading" parent="AppTheme">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+    <style name="TextView.HeadingLarge" parent="AppTheme">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+</resources>

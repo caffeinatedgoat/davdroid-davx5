@@ -12,256 +12,44 @@
     <!-- common strings -->
     <string name="app_name">Soldupe Sync</string>
     <string name="account_type">com.soldupe.sync</string>
-    <string name="help">Help</string>
-    <string name="manage_accounts">Manage accounts</string>
-    <string name="please_wait">Please wait …</string>
-    <string name="send">Send</string>
 
     <!-- startup dialogs -->
-    <string name="startup_battery_optimization">Battery Optimization</string>
-    <string name="startup_battery_optimization_message">Android may disable/reduce DAVdroid synchronization after a few days. To prevent this, turn off battery optimization.</string>
-    <string name="startup_battery_optimization_disable">Turn off for DAVdroid</string>
-    <string name="startup_dont_show_again">Don\'t show again</string>
-    <string name="startup_development_version">DAVdroid Preview Release</string>
-    <string name="startup_development_version_message">This is a development version of DAVdroid. Be aware that things may not work as expected. Please give us constructive feedback to improve DAVdroid.</string>
-    <string name="startup_development_version_give_feedback">Give feedback</string>
-    <string name="startup_donate">Open-Source Information</string>
-    <string name="startup_donate_message">We\'re happy that you use DAVdroid, which is open-source software (GPLv3). Because developing DAVdroid is hard work and took us thousands of working hours, please consider a donation.</string>
-    <string name="startup_donate_now">Show donation page</string>
-    <string name="startup_donate_later">Maybe later</string>
-    <string name="startup_google_play_accounts_removed">Play Store DRM bug information</string>
-    <string name="startup_google_play_accounts_removed_message">Under certain conditions, Play Store DRM may cause all DAVdroid accounts to be gone after a reboot or after upgrading DAVdroid. If you\'re affected by this problem (and only then), please install \"DAVdroid JB Workaround\" from Play Store.</string>
-    <string name="startup_google_play_accounts_removed_more_info">More information</string>
-    <string name="startup_opentasks_not_installed">OpenTasks not installed</string>
-    <string name="startup_opentasks_not_installed_message">The OpenTasks app is not available, so DAVdroid won\'t be able to synchronize task lists.</string>
-    <string name="startup_opentasks_reinstall_davdroid">After installing OpenTasks, you have to RE-INSTALL DAVdroid and add your accounts again (Android bug).</string>
-    <string name="startup_opentasks_not_installed_install">Install OpenTasks</string>
+    <string name="startup_battery_optimization_message">Android may disable/reduce Soldupe synchronization after a few days. To prevent this, turn off battery optimization.</string>
+    <string name="startup_battery_optimization_disable">Turn off for Soldupe Sync</string>
+    <string name="startup_opentasks_not_installed_message">The OpenTasks app is not available, so Soldupe Sync won\'t be able to synchronize task lists.</string>
+    <string name="startup_opentasks_reinstall_davdroid">After installing OpenTasks, you have to RE-INSTALL Soldupe Sync and add your accounts again (Android bug).</string>
 
     <!-- AboutActivity -->
     <string name="about_license_terms">License terms</string>
     <string name="about_license_info_no_warranty">This program comes with ABSOLUTELY NO WARRANTY. It is free software, and you are welcome to redistribute it under certain conditions.</string>
 
     <!-- global settings -->
-    <string name="logging_davdroid_file_logging">DAVdroid file logging</string>
-    <string name="logging_to_external_storage">Logging to external storage: %s</string>
-    <string name="logging_to_external_storage_warning">Delete logs as soon as possible!</string>
-    <string name="logging_couldnt_create_file">Couldn\'t create external log file: %s</string>
-    <string name="logging_no_external_storage">External storage not found</string>
+    <string name="logging_davdroid_file_logging">Soldupe Sync file logging</string>
 
     <!-- AccountsActivity -->
     <string name="navigation_drawer_news_updates">Social Media</string>
     <string name="navigation_drawer_website">Web site</string>
     <string name="navigation_drawer_faq">FAQ</string>
 
-    <string name="account_list_empty">Welcome to DAVdroid!\n\nYou can add a CalDAV/CardDAV account now.</string>
-
-    <!-- DavService -->
-    <string name="dav_service_refresh_failed">Service detection failed</string>
-    <string name="dav_service_refresh_couldnt_refresh">Couldn\'t refresh collection list</string>
-
-    <!-- AppSettingsActivity -->
-    <string name="app_settings">Settings</string>
-    <string name="app_settings_user_interface">User interface</string>
-    <string name="app_settings_reset_hints">Reset hints</string>
-    <string name="app_settings_reset_hints_summary">Re-enables hints which have been dismissed previously</string>
-    <string name="app_settings_reset_hints_success">All hints will be shown again</string>
-    <string name="app_settings_connection">Connection</string>
-    <string name="app_settings_override_proxy">Override proxy settings</string>
-    <string name="app_settings_override_proxy_on">Use custom proxy settings</string>
-    <string name="app_settings_override_proxy_off">Use system default proxy settings</string>
-    <string name="app_settings_override_proxy_host">HTTP proxy host name</string>
-    <string name="app_settings_override_proxy_port">HTTP proxy port</string>
-    <string name="app_settings_security">Security</string>
-    <string name="app_settings_distrust_system_certs">Distrust system certificates</string>
-    <string name="app_settings_distrust_system_certs_on">System and user-added CAs won\'t be trusted</string>
-    <string name="app_settings_distrust_system_certs_off">System and user-added CAs will be trusted (recommended)</string>
-    <string name="app_settings_reset_certificates">Reset (un)trusted certificates</string>
-    <string name="app_settings_reset_certificates_summary">Resets trust of all custom certificates</string>
-    <string name="app_settings_reset_certificates_success">All custom certificates have been cleared</string>
-    <string name="app_settings_debug">Debugging</string>
-    <string name="app_settings_log_to_external_storage">Log to external file</string>
-    <string name="app_settings_log_to_external_storage_on">Logging to external storage (if available)</string>
-    <string name="app_settings_log_to_external_storage_off">External file logging is disabled</string>
-    <string name="app_settings_show_debug_info">Show debug info</string>
-    <string name="app_settings_show_debug_info_details">View/share software and configuration details</string>
-
-    <!-- AccountActivity -->
-    <string name="account_synchronize_now">Synchronize now</string>
-    <string name="account_synchronizing_now">Synchronizing now</string>
-    <string name="account_settings">Account settings</string>
-    <string name="account_rename">Rename account</string>
-    <string name="account_rename_new_name">Unsaved local data may be dismissed. Re-synchronization is required after renaming. New account name:</string>
-    <string name="account_rename_rename">Rename</string>
-    <string name="account_delete">Delete account</string>
-    <string name="account_delete_confirmation_title">Really delete account?</string>
-    <string name="account_delete_confirmation_text">All local copies of address books, calendars and task lists will be deleted.</string>
-    <string name="account_carddav">CardDAV</string>
-    <string name="account_caldav">CalDAV</string>
-    <string name="account_refresh_address_book_list">Refresh address book list</string>
-    <string name="account_create_new_address_book">Create new address book</string>
-    <string name="account_refresh_calendar_list">Refresh calendar list</string>
-    <string name="account_create_new_calendar">Create new calendar</string>
+    <string name="account_list_empty">Welcome to Soldupe Sync!\n\nYou can add your Soldupe account now.</string>
 
     <!-- PermissionsActivity -->
-    <string name="permissions_title">DAVdroid permissions</string>
-    <string name="permissions_calendar">Calendar permissions</string>
-    <string name="permissions_calendar_details">To synchronize CalDAV events with your local calendars, DAVdroid needs to access your calendars.</string>
-    <string name="permissions_calendar_request">Request calendar permissions</string>
-    <string name="permissions_contacts">Contacts permissions</string>
-    <string name="permissions_contacts_details">To synchronize CardDAV address books with your local contacts, DAVdroid needs to access your contacts.</string>
-    <string name="permissions_contacts_request">Request contacts permissions</string>
-    <string name="permissions_opentasks">OpenTasks permissions</string>
-    <string name="permissions_opentasks_details">To synchronize CalDAV tasks with your local task lists, DAVdroid needs to access OpenTasks.</string>
-    <string name="permissions_opentasks_request">Request OpenTasks permissions</string>
+    <string name="permissions_title">Soldupe permissions</string>
+    <string name="permissions_calendar_details">To synchronize CalDAV events with your local calendars, Soldupe Sync needs to access your calendars.</string>
+    <string name="permissions_contacts_details">To synchronize CardDAV address books with your local contacts, Soldupe Sync needs to access your contacts.</string>
+    <string name="permissions_opentasks_details">To synchronize CalDAV tasks with your local task lists, Soldupe Sync needs to access OpenTasks.</string>
 
     <!-- AddAccountActivity -->
-    <string name="login_title">Add account</string>
-    <string name="login_type_email">Login with email address</string>
-    <string name="login_email_address">Email address</string>
-    <string name="login_email_address_error">Valid email address required</string>
-    <string name="login_password">Password</string>
-    <string name="login_password_required">Password required</string>
-    <string name="login_type_url">Login with URL and user name</string>
-    <string name="login_url_must_be_http_or_https">URL must begin with http(s)://</string>
-    <string name="login_url_host_name_required">Host name required</string>
-    <string name="login_user_name">User name</string>
-    <string name="login_user_name_required">User name required</string>
-    <string name="login_base_url">Base URL</string>
-    <string name="login_login">Login</string>
-    <string name="login_back">Back</string>
-    <string name="login_create_account">Create account</string>
-    <string name="login_account_name">Account name</string>
-    <string name="login_account_name_info">Use your email address as account name because Android will use the account name as ORGANIZER field for events you create. You can\'t have two accounts with the same name.</string>
-    <string name="login_account_contact_group_method">Contact group method:</string>
-    <string name="login_account_name_required">Account name required</string>
-    <string name="login_account_not_created">Account could not be created</string>
-
-    <string name="login_configuration_detection">Configuration detection</string>
-    <string name="login_querying_server">Please wait, querying server…</string>
-    <string name="login_no_caldav_carddav">Couldn\'t find CalDAV or CardDAV service.</string>
-    <string name="login_view_logs">View logs</string>
+    <string name="login_app_title_short">Soldupe Sync</string>
+    <string name="login_app_slogan">Your data. Your decision.</string>
+    <string name="login_two_factor_authentication">Two-factor authentication: use the generated device-specific password instead of your account password.</string>
 
     <!-- AccountSettingsActivity -->
-    <string name="settings_title">Settings: %s</string>
-    <string name="settings_authentication">Authentication</string>
-    <string name="settings_username">User name</string>
-    <string name="settings_enter_username">Enter user name:</string>
-    <string name="settings_password">Password</string>
-    <string name="settings_password_summary">Update the password according to your server.</string>
-    <string name="settings_enter_password">Enter your password:</string>
-    <string name="settings_sync">Synchronization</string>
-    <string name="settings_sync_interval_contacts">Contacts sync. interval</string>
-    <string name="settings_sync_summary_manually">Only manually</string>
-    <string name="settings_sync_summary_periodically" tools:ignore="PluralsCandidate">Every %d minutes + immediately on local changes</string>
-    <string name="settings_sync_summary_not_available">Not available</string>
-    <string name="settings_sync_interval_calendars">Calendars sync. interval</string>
-    <string name="settings_sync_interval_tasks">Tasks sync. interval</string>
-    <string-array name="settings_sync_interval_seconds">
-        <item>-1</item>
-        <item>300</item>
-        <item>600</item>
-        <item>900</item>
-        <item>3600</item>
-        <item>7200</item>
-        <item>14400</item>
-        <item>86400</item>
-    </string-array>
-    <string-array name="settings_sync_interval_names">
-        <item>Only manually</item>
-        <item>Every 5 minutes</item>
-        <item>Every 10 minutes</item>
-        <item>Every 15 minutes</item>
-        <item>Every hour</item>
-        <item>Every 2 hours</item>
-        <item>Every 4 hours</item>
-        <item>Once a day</item>
-    </string-array>
-    <string name="settings_sync_wifi_only">Sync over WiFi only</string>
-    <string name="settings_sync_wifi_only_on">Synchronization is restricted to WiFi connections</string>
-    <string name="settings_sync_wifi_only_off">Connection type is not taken into consideration</string>
-    <string name="settings_sync_wifi_only_ssid">WiFi SSID restriction</string>
-    <string name="settings_sync_wifi_only_ssid_on">Will only synchronize over %s</string>
-    <string name="settings_sync_wifi_only_ssid_off">All WiFi connections may be used</string>
-    <string name="settings_sync_wifi_only_ssid_message">Enter the name of a WiFi network (SSID) to restrict synchronization to this network, or leave blank for all WiFi connections.</string>
-    <string name="settings_carddav">CardDAV</string>
-    <string name="settings_contact_group_method">Contact group method</string>
-    <string-array name="settings_contact_group_method_values">
-        <item>GROUP_VCARDS</item>
-        <item>CATEGORIES</item>
-    </string-array>
-    <string-array name="settings_contact_group_method_entries">
-        <item>Groups are separate VCards</item>
-        <item>Groups are per-contact categories</item>
-    </string-array>
-    <string name="settings_caldav">CalDAV</string>
-    <string name="settings_sync_time_range_past">Past event time limit</string>
-    <string name="settings_sync_time_range_past_none">All events will be synchronized</string>
-    <plurals name="settings_sync_time_range_past_days">
-        <item quantity="one">Events more than one day in the past will be ignored</item>
-        <item quantity="other">Events more than %d days in the past will be ignored</item>
-    </plurals>
-    <string name="settings_sync_time_range_past_message">Events which are more than this number of days in the past will be ignored (may be 0). Leave blank to synchronize all events.</string>
     <string name="settings_manage_calendar_colors">Manage calendar colors</string>
-    <string name="settings_manage_calendar_colors_on">Calendar colors are managed by DAVdroid</string>
-    <string name="settings_manage_calendar_colors_off">Calendar colors are not set by DAVdroid</string>
-
-    <!-- collection management -->
-    <string name="create_addressbook">Create address book</string>
-    <string name="create_addressbook_display_name_hint">My Address Book</string>
-    <string name="create_calendar">Create CalDAV collection</string>
-    <string name="create_calendar_display_name_hint">My Calendar</string>
-    <string name="create_calendar_time_zone">Time zone:</string>
-    <string name="create_calendar_type">Collection type:</string>
-    <string name="create_calendar_type_only_events">Calendar (only events)</string>
-    <string name="create_calendar_type_only_tasks">Task list (only tasks)</string>
-    <string name="create_calendar_type_events_and_tasks">Combined (events and tasks)</string>
-    <string name="create_collection_color">Set a collection color</string>
-    <string name="create_collection_creating">Creating collection</string>
-    <string name="create_collection_display_name">Display name (title) of this collection:</string>
-    <string name="create_collection_display_name_required">Title is required</string>
-    <string name="create_collection_description">Description (optional):</string>
-    <string name="create_collection_home_set">Home set:</string>
-    <string name="create_collection_create">Create</string>
-    <string name="delete_collection">Delete collection</string>
-    <string name="delete_collection_confirm_title">Are you sure?</string>
-    <string name="delete_collection_confirm_warning">This collection (%s) and all its data will be removed from the server.</string>
-    <string name="delete_collection_deleting_collection">Deleting collection</string>
-
-    <!-- ExceptionInfoFragment -->
-    <string name="exception">An error has occurred.</string>
-    <string name="exception_httpexception">An HTTP error has occurred.</string>
-    <string name="exception_ioexception">An I/O error has occurred.</string>
-    <string name="exception_show_details">Show details</string>
+    <string name="settings_manage_calendar_colors_on">Calendar colors are managed by Soldupe Sync</string>
+    <string name="settings_manage_calendar_colors_off">Calendar colors are not set by Soldupe Sync</string>
 
     <!-- sync errors and DebugInfoActivity -->
-    <string name="authority_log_provider">at.bitfire.davdroid.log</string>
-    <string name="debug_info_title">Debug info</string>
-    <string name="sync_error_permissions">DAVdroid permissions</string>
-    <string name="sync_error_permissions_text">Additional permissions required</string>
-    <string name="sync_error_calendar">Calendar synchronization failed (%s)</string>
-    <string name="sync_error_contacts">Address book synchronization failed (%s)</string>
-    <string name="sync_error_tasks">Task synchronization failed (%s)</string>
-    <string name="sync_error">Error while %s</string>
-    <string name="sync_error_http_dav">Server error while %s</string>
-    <string name="sync_error_local_storage">Database error while %s</string>
-    <string-array name="sync_error_phases">
-        <item>preparing synchronization</item>
-        <item>querying capabilities</item>
-        <item>processing locally deleted entries</item>
-        <item>preparing created/modified entries</item>
-        <item>uploading created/modified entries</item>
-        <item>checking sync state</item>
-        <item>listing local entries</item>
-        <item>listing remote entries</item>
-        <item>comparing local/remote entries</item>
-        <item>downloading remote entries</item>
-        <item>post-processing</item>
-        <item>saving sync state</item>
-    </string-array>
-    <string name="sync_error_unauthorized">User name/password wrong</string>
-
-    <!-- cert4android -->
-    <string name="certificate_notification_connection_security">DAVdroid: Connection security</string>
-    <string name="trust_certificate_unknown_certificate_found">DAVdroid has encountered an unknown certificate. Do you want to trust it?</string>
+    <string name="sync_error_permissions">Soldupe Sync permissions</string>
 
 </resources>

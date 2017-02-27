@@ -91,30 +91,7 @@
   <string name="permissions_opentasks_details">Um CalDAV-Aufgaben mit lokalen Aufgabenlisten abzugleichen, benötigt DAVdroid Zugriffsrechte für OpenTasks.</string>
   <string name="permissions_opentasks_request">OpenTasks-Zugriff anfordern</string>
   <!--AddAccountActivity-->
-  <string name="login_title">Konto hinzufügen</string>
-  <string name="login_type_email">Mit Email-Adresse anmelden</string>
-  <string name="login_email_address">Email-Adresse</string>
-  <string name="login_email_address_error">Gültige Email-Adresse benötigt</string>
-  <string name="login_password">Passwort</string>
-  <string name="login_password_required">Passwort wird benötigt</string>
-  <string name="login_type_url">Mit URL und Benutzername anmelden</string>
-  <string name="login_url_must_be_http_or_https">URL muss mit http(s):// beginnen</string>
-  <string name="login_url_host_name_required">Hostname wird benötigt</string>
-  <string name="login_user_name">Benutzername</string>
-  <string name="login_user_name_required">Benutzername wird benötigt</string>
-  <string name="login_base_url">Basis-URL</string>
-  <string name="login_login">Anmelden</string>
-  <string name="login_back">Zurück</string>
-  <string name="login_create_account">Konto anlegen</string>
-  <string name="login_account_name">Kontoname</string>
-  <string name="login_account_name_info">Verwenden Sie Ihre Email-Adresse als Kontonamen, da Android den Kontonamen als ORGANIZER einsetzt. Es kann allerdings keine zwei Konten mit dem gleichen Namen geben.</string>
-  <string name="login_account_contact_group_method">Kontaktgruppen-Methode:</string>
-  <string name="login_account_name_required">Kontoname wird benötigt</string>
-  <string name="login_account_not_created">Konto konnte nicht angelegt werden</string>
-  <string name="login_configuration_detection">Ressourcen-Erkennung</string>
-  <string name="login_querying_server">Server-Informationen werden abgerufen. Bitte warten …</string>
-  <string name="login_no_caldav_carddav">Es konnte weder ein CalDAV- noch ein CardDAV-Dienst gefunden werden.</string>
-  <string name="login_view_logs">Protokoll anzeigen</string>
+  <string name="login_two_factor_authentication">Zwei-Faktor-Authentifizierung: Verwenden Sie das generierte app-spezifische Passwort anstelle Ihres Konto-Passworts.</string>
   <!--AccountSettingsActivity-->
   <string name="settings_title">Einstellungen: %s</string>
   <string name="settings_authentication">Anmeldeinformationen</string>

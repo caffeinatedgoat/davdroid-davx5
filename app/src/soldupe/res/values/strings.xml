@@ -11,7 +11,8 @@
 
     <!-- common strings -->
     <string name="app_name">Soldupe Sync</string>
-    <string name="account_type">com.soldupe.sync</string>
+    <string name="app_package">com.soldupe.cloudsync</string>
+    <string name="account_type">com.soldupe.cloudsync</string>
 
     <!-- startup dialogs -->
     <string name="startup_battery_optimization_message">Android may disable/reduce Soldupe synchronization after a few days. To prevent this, turn off battery optimization.</string>
@@ -19,18 +20,11 @@
     <string name="startup_opentasks_not_installed_message">The OpenTasks app is not available, so Soldupe Sync won\'t be able to synchronize task lists.</string>
     <string name="startup_opentasks_reinstall_davdroid">After installing OpenTasks, you have to RE-INSTALL Soldupe Sync and add your accounts again (Android bug).</string>
 
-    <!-- AboutActivity -->
-    <string name="about_license_terms">License terms</string>
-    <string name="about_license_info_no_warranty">This program comes with ABSOLUTELY NO WARRANTY. It is free software, and you are welcome to redistribute it under certain conditions.</string>
-
     <!-- global settings -->
     <string name="logging_davdroid_file_logging">Soldupe Sync file logging</string>
 
     <!-- AccountsActivity -->
     <string name="navigation_drawer_news_updates">Social Media</string>
-    <string name="navigation_drawer_website">Web site</string>
-    <string name="navigation_drawer_faq">FAQ</string>
-
     <string name="account_list_empty">Welcome to Soldupe Sync!\n\nYou can add your Soldupe account now.</string>
 
     <!-- PermissionsActivity -->
@@ -42,14 +36,14 @@
     <!-- AddAccountActivity -->
     <string name="login_app_title_short">Soldupe Sync</string>
     <string name="login_app_slogan">Your data. Your decision.</string>
-    <string name="login_two_factor_authentication">Two-factor authentication: use the generated device-specific password instead of your account password.</string>
+    <string name="login_two_factor_authentication">Two-factor authentication: use the generated app password instead of your account password.</string>
 
     <!-- AccountSettingsActivity -->
-    <string name="settings_manage_calendar_colors">Manage calendar colors</string>
     <string name="settings_manage_calendar_colors_on">Calendar colors are managed by Soldupe Sync</string>
     <string name="settings_manage_calendar_colors_off">Calendar colors are not set by Soldupe Sync</string>
 
     <!-- sync errors and DebugInfoActivity -->
+    <string name="authority_log_provider">com.soldupe.cloudsync.log</string>
     <string name="sync_error_permissions">Soldupe Sync permissions</string>
 
 </resources>

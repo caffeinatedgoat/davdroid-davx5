@@ -64,7 +64,7 @@ public class SoldupeLoginCredentialsFragment extends Fragment {
             valid = false;
         }
 
-        return valid ? new LoginCredentials(URI.create("http://debian-test.lan/"), userName, password) : null;
+        return valid ? new LoginCredentials(URI.create("https://webservice.dev.soldupe.com/remote.php/dav/"), userName, password) : null;
     }
 
 

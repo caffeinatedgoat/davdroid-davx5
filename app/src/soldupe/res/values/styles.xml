@@ -37,6 +37,8 @@
 
     <!-- widgets -->
 
+    <color name="cardview_background">@color/green500</color>
+
     <style name="tablayout" parent="Base.Widget.Design.TabLayout">
         <item name="android:background">@color/green500</item>
     </style>

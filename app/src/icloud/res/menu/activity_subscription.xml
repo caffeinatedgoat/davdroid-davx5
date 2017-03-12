@@ -5,7 +5,7 @@
     <item
         app:showAsAction="always"
         android:onClick="showInMarket"
-        android:icon="@drawable/ic_subscriptions_light"
+        android:icon="@drawable/ic_subscriptions_action"
         android:title="@string/subscription_management_manage" />
 
 </menu>

@@ -23,6 +23,7 @@
 
     <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
     </style>
+    <color name="actionBarButton">#FFFFFF</color>
 
 
     <!-- widgets -->

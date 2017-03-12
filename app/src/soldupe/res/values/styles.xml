@@ -25,6 +25,7 @@
 
     <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
     </style>
+    <color name="actionBarButton">@android:color/white</color>
 
 
     <!-- AddAccountActivity -->

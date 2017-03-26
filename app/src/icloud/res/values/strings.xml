@@ -4,6 +4,8 @@
     <!-- common strings -->
     <string name="app_name">MultiSync for Cloud</string>
     <string name="account_type">at.bitfire.cloudsync</string>
+    <string name="account_type_address_book">at.bitfire.cloudsync.address_book</string>
+    <string name="address_books_authority">at.bitfire.cloudsync.addressbooks</string>
 
     <!-- startup dialogs -->
     <string name="startup_battery_optimization_message">Android may disable/reduce synchronization with iCloud® after a few days. To prevent this, turn off battery optimization.</string>

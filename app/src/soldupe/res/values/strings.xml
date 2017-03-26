@@ -13,6 +13,8 @@
     <string name="app_name">Soldupe Sync</string>
     <string name="app_package">com.soldupe.cloudsync</string>
     <string name="account_type">com.soldupe.cloudsync</string>
+    <string name="account_type_address_book">com.soldupe.cloudsync.address_book</string>
+    <string name="address_books_authority">com.soldupe.cloudsync.addressbooks</string>
 
     <!-- startup dialogs -->
     <string name="startup_battery_optimization_message">Android may disable/reduce Soldupe synchronization after a few days. To prevent this, turn off battery optimization.</string>

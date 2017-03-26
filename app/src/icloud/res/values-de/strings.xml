@@ -3,6 +3,7 @@
 
     <!-- common strings -->
     <string name="app_name">MultiSync for Cloud</string>
+    <string name="account_title_address_book">Cloud-Adressbuch</string>
 
     <!-- startup dialogs -->
     <string name="startup_battery_optimization_message">Android kann die iCloud®-Synchronisierung in ein paar Tagen reduzieren/deaktivieren. Um dies zu verhindern, muss die Akku-Leistungsoptimierung deaktiviert werden.</string>

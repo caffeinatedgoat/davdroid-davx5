@@ -51,6 +51,7 @@
     <!-- *** icloud only *** -->
     <string name="subscription_notification_title">Lizenz wird benötigt</string>
     <string name="subscription_notification_text">MultiSync for Cloud benötigt eine gültige Lizenz.</string>
+    <string name="subscription_notification_show_details">Details anzeigen</string>
 
     <string name="subscription_management">Lizenzverwaltung</string>
     <string name="subscription_management_manage">In Google Play verwalten</string>

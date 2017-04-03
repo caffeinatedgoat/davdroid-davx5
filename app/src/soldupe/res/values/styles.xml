@@ -3,8 +3,8 @@
     <!-- colors -->
     <color name="deep_purple300">#9575cd</color>
     <color name="deep_purple600">#5e35b1</color>
-    <color name="green500">#8bc34a</color>
-    <color name="green800">#558b2f</color>
+    <color name="green500">#449d44</color>
+    <color name="soldupeGreen">#317433</color>
 
 
     <!-- preference-v14 uses this color for categories text -->
@@ -32,20 +32,20 @@
 
     <style name="account_list_card">
         <item name="android:layout_width">match_parent</item>
-        <item name="cardBackgroundColor">@color/green500</item>
+        <item name="cardBackgroundColor">@color/soldupeGreen</item>
     </style>
 
 
     <!-- widgets -->
 
-    <color name="cardview_background">@color/green500</color>
+    <color name="cardview_background">@color/soldupeGreen</color>
 
     <style name="tablayout" parent="Base.Widget.Design.TabLayout">
-        <item name="android:background">@color/green500</item>
+        <item name="android:background">@color/soldupeGreen</item>
     </style>
 
     <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/green500</item>
+        <item name="android:background">@color/soldupeGreen</item>
         <item name="titleTextColor">@android:color/white</item>
     </style>
 

@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
   <string name="app_name">Soldupe Sync</string>
+  <string name="account_title_address_book">Soldupe Adressbuch</string>
   <!--startup dialogs-->
   <string name="startup_battery_optimization_message">Android kann die Soldupe Sync-Synchronisierung in ein paar Tagen reduzieren/deaktivieren. Um dies zu verhindern, muss die Akku-Leistungsoptimierung deaktiviert werden.</string>
   <string name="startup_battery_optimization_disable">Für Soldupe Sync deaktivieren</string>

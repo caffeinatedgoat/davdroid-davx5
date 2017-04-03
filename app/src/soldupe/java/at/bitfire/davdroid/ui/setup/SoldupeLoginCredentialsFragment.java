@@ -8,6 +8,9 @@
 
 package at.bitfire.davdroid.ui.setup;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +23,7 @@ import android.widget.EditText;
 import java.net.URI;
 
 import at.bitfire.davdroid.R;
+import at.bitfire.davdroid.ui.AccountsActivity;
 import at.bitfire.davdroid.ui.widget.EditPassword;
 
 public class SoldupeLoginCredentialsFragment extends Fragment {
@@ -31,6 +35,14 @@ public class SoldupeLoginCredentialsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        AccountManager accountManager = AccountManager.get(getContext());
+        Account[] accounts = accountManager.getAccountsByType(getString(R.string.account_type));
+        if (accounts.length > 0) {
+            // Soldupe account already exists
+            getActivity().finish();
+            startActivity(new Intent(getContext(), AccountsActivity.class), null);
+        }
+
         View v = inflater.inflate(R.layout.login_credentials_fragment, container, false);
 
         editUserName = (EditText)v.findViewById(R.id.user_name);
@@ -64,7 +76,7 @@ public class SoldupeLoginCredentialsFragment extends Fragment {
             valid = false;
         }
 
-        return valid ? new LoginCredentials(URI.create("https://webservice.dev.soldupe.com/remote.php/dav/"), userName, password) : null;
+        return valid ? new LoginCredentials(URI.create("https://cloud.soldupe.com/"), userName, password) : null;
     }
 
 

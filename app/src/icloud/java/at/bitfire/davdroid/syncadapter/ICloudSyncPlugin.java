@@ -1,6 +1,5 @@
 package at.bitfire.davdroid.syncadapter;
 
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,8 +7,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.app.NotificationCompat;
 
 import com.android.vending.billing.IInAppBillingService;
 
@@ -20,6 +19,7 @@ import at.bitfire.davdroid.BillingException;
 import at.bitfire.davdroid.Constants;
 import at.bitfire.davdroid.R;
 import at.bitfire.davdroid.SubscriptionManager;
+import at.bitfire.davdroid.ui.DebugInfoActivity;
 import at.bitfire.davdroid.ui.SubscriptionActivity;
 
 public class ICloudSyncPlugin implements ISyncPlugin {
@@ -64,6 +64,8 @@ public class ICloudSyncPlugin implements ISyncPlugin {
                 }
         }
 
+        Exception exception = null;
+
         try {
             SubscriptionManager subscription = new SubscriptionManager(context, billingService);
             if (subscription.isValid()) {
@@ -72,20 +74,28 @@ public class ICloudSyncPlugin implements ISyncPlugin {
             }
         } catch(BillingException e) {
             App.log.log(Level.WARNING, "Couldn't determine subscription state", e);
+            exception = e;
         }
 
         // no valid license found, show notification
-        Notification notify = new NotificationCompat.Builder(context)
+        NotificationCompat.Builder notify = new NotificationCompat.Builder(context)
                 .setLargeIcon(App.getLauncherBitmap(context))
                 .setSmallIcon(R.drawable.ic_account_circle_white)
                 .setContentTitle(context.getString(R.string.subscription_notification_title))
                 .setContentText(context.getString(R.string.subscription_notification_text))
                 .setCategory(NotificationCompat.CATEGORY_STATUS)
                 .setAutoCancel(true)
-                .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, SubscriptionActivity.class), PendingIntent.FLAG_UPDATE_CURRENT))
-                .build();
+                .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, SubscriptionActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
+
+        if (exception != null) {
+            Intent intent = new Intent(context, DebugInfoActivity.class);
+            intent.putExtra(DebugInfoActivity.KEY_THROWABLE, exception);
+            notify.addAction(R.drawable.ic_error_light, context.getString(R.string.subscription_notification_show_details),
+                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+        }
+
         NotificationManagerCompat nm = NotificationManagerCompat.from(context);
-        nm.notify(Constants.NOTIFICATION_SUBSCRIPTION, notify);
+        nm.notify(Constants.NOTIFICATION_SUBSCRIPTION, notify.build());
 
         return false;
     }

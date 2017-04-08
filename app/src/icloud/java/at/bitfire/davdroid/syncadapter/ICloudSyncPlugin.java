@@ -5,6 +5,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SyncResult;
+import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
@@ -44,7 +46,7 @@ public class ICloudSyncPlugin implements ISyncPlugin {
 
 
     @Override
-    public boolean beforeSync(@NonNull Context context) {
+    public boolean beforeSync(@NonNull Context context, SyncResult syncResult) {
         // connect to Google Play billing service
         Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
@@ -74,7 +76,12 @@ public class ICloudSyncPlugin implements ISyncPlugin {
             }
         } catch(BillingException e) {
             App.log.log(Level.WARNING, "Couldn't determine subscription state", e);
-            exception = e;
+            if (e.getCause() instanceof DeadObjectException) {
+                // ignore DeadObjectExceptions and restart sync as soon as possible
+                syncResult.stats.numIoExceptions++;
+                return false;
+            } else
+                exception = e;
         }
 
         // no valid license found, show notification
@@ -101,7 +108,7 @@ public class ICloudSyncPlugin implements ISyncPlugin {
     }
 
     @Override
-    public void afterSync(@NonNull Context context) {
+    public void afterSync(@NonNull Context context, SyncResult syncResult) {
         if (billingService != null)
             try {
                 context.unbindService(billingServiceConnection);

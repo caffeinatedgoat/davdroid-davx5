@@ -6,6 +6,7 @@
     <string name="account_type">at.bitfire.cloudsync</string>
     <string name="account_type_address_book">at.bitfire.cloudsync.address_book</string>
     <string name="address_books_authority">at.bitfire.cloudsync.addressbooks</string>
+    <string name="homepage_url">https://multisync.cloud/?pk_campaign=multisync-app</string>
 
     <!-- startup dialogs -->
     <string name="startup_battery_optimization_message">Android may disable/reduce synchronization with iCloud® after a few days. To prevent this, turn off battery optimization.</string>
@@ -20,6 +21,7 @@
     <string name="navigation_drawer_subtitle">runs with iCloud®</string>
     <string name="navigation_drawer_license_status">License status</string>
     <string name="navigation_drawer_about">About MultiSync</string>
+    <string name="navigation_drawer_faq_url">https://multisync.cloud/support/?pk_campaign=multisync-app</string>
 
     <string name="account_list_empty">MultiSync for Cloud\n\nContacts · Calendar · Reminders\n\nYou can add your iCloud® account now.</string>
 
@@ -34,6 +36,7 @@
     <string name="permissions_opentasks_details">To synchronize iCloud® reminders with your local task lists, MultiSync needs to access OpenTasks.</string>
 
     <!-- AddAccountActivity -->
+    <string name="login_help_url">https://multisync.cloud/configuration/?pk_campaign=multisync-app</string>
     <string name="login_app_title_short">MultiSync</string>
     <string name="login_runs_with_icloud">runs with iCloud®</string>
     <string name="login_user_name">Apple® ID</string>

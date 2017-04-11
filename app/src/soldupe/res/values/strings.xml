@@ -16,6 +16,7 @@
     <string name="account_type_address_book">com.soldupe.cloudsync.address_book</string>
     <string name="account_title_address_book">Soldupe Address book</string>
     <string name="address_books_authority">com.soldupe.cloudsync.addressbooks</string>
+    <string name="homepage_url">https://soldupe.com/?pk_campaign=soldupe-sync</string>
 
     <!-- startup dialogs -->
     <string name="startup_battery_optimization_message">Android may disable/reduce Soldupe synchronization after a few days. To prevent this, turn off battery optimization.</string>
@@ -27,6 +28,7 @@
     <string name="logging_davdroid_file_logging">Soldupe Sync file logging</string>
 
     <!-- AccountsActivity -->
+    <string name="navigation_drawer_faq_url">https://soldupe.com/frequently-asked-questions/?pk_campaign=davdroid-app</string>
     <string name="navigation_drawer_news_updates">Social Media</string>
     <string name="account_list_empty">Welcome to Soldupe Sync!\n\nYou can add your Soldupe account now.</string>
 
@@ -37,6 +39,7 @@
     <string name="permissions_opentasks_details">To synchronize CalDAV tasks with your local task lists, Soldupe Sync needs to access OpenTasks.</string>
 
     <!-- AddAccountActivity -->
+    <string name="login_help_url">https://soldupe.com/sync-configuration?pk_campaign=soldupe-sync</string>
     <string name="login_app_title_short">Soldupe Sync</string>
     <string name="login_app_slogan">Your data. Your decision.</string>
     <string name="login_two_factor_authentication">Two-factor authentication: use the generated app password instead of your account password.</string>

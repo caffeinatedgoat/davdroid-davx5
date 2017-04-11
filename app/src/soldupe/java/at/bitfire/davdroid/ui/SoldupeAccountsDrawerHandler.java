@@ -29,10 +29,10 @@ public class SoldupeAccountsDrawerHandler implements IAccountsDrawerHandler {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/soldupecloudservices")));
                 break;
             case R.id.nav_website:
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Constants.webUri));
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(App.getHomepageUrl())));
                 break;
             case R.id.nav_faq:
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Constants.webUri.buildUpon().appendEncodedPath("frequently-asked-questions/").build()));
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(activity.getString(R.string.navigation_drawer_faq_url))));
                 break;
 	    default:
                 return false;

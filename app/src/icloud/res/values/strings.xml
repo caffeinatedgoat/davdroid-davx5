@@ -40,9 +40,10 @@
     <string name="login_app_title_short">MultiSync</string>
     <string name="login_runs_with_icloud">runs with iCloud®</string>
     <string name="login_user_name">Apple® ID</string>
-    <string name="login_two_factor_authentication">If you use two-factor authentication, use your app password here instead of your account password.</string>
+    <string name="login_password">app-specific password</string>
+    <string name="login_app_specific_password_hint"><![CDATA[Important: You have to use the <b>app-specific password</b> instead of your iCloud account password. <a href="https://multisync.cloud/configuration/?pk_campaign=multisync-app">More information</a>]]></string>
     <string name="login_trademark_notice">This app is not affiliated to, nor has it been authorized, sponsored or otherwise approved by Apple Inc. Apple® and iCloud® are registered trademarks of Apple Inc.</string>
-    <string name="login_no_caldav_carddav">Apple ID/password wrong, or network problems. (Did you use your generated app password in case of two-factor authentication?)</string>
+    <string name="login_no_caldav_carddav">Apple ID/password wrong, or network problems. (Did you use the app-specific password?)</string>
 
     <!-- AccountSettingsActivity -->
     <string name="settings_manage_calendar_colors_on">Calendar colors are managed by MultiSync</string>

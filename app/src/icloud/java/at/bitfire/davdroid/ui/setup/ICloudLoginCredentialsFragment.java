@@ -4,6 +4,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,10 @@ public class ICloudLoginCredentialsFragment extends Fragment {
 
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/BebasNeue_Light.ttf");
         ((TextView)v.findViewById(R.id.login_title)).setTypeface(tf);
+
+        TextView tv = (TextView)v.findViewById(R.id.login_password_hint);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        tv.setText(Html.fromHtml(getString(R.string.login_app_specific_password_hint)));
 
         editUserName = (EditText)v.findViewById(R.id.user_name);
         editUrlPassword = (EditPassword)v.findViewById(R.id.url_password);

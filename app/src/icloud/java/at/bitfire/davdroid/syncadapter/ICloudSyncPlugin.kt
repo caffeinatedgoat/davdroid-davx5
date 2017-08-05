@@ -7,6 +7,7 @@ import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import at.bitfire.davdroid.*
+import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.ui.DebugInfoActivity
 import at.bitfire.davdroid.ui.SubscriptionActivity
 import com.android.vending.billing.IInAppBillingService
@@ -20,7 +21,7 @@ class ICloudSyncPlugin: ISyncPlugin {
     val billingServiceConnection = object: ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             synchronized(billingServiceLock) {
-                billingService = IInAppBillingService.Stub.asInterface(service);
+                billingService = IInAppBillingService.Stub.asInterface(service)
                 billingServiceLock.notify()
             }
         }
@@ -28,7 +29,7 @@ class ICloudSyncPlugin: ISyncPlugin {
         override fun onServiceDisconnected(name: ComponentName?) {
             billingService = null
         }
-    };
+    }
 
 
     override fun beforeSync(context: Context, syncResult: SyncResult): Boolean {
@@ -36,7 +37,7 @@ class ICloudSyncPlugin: ISyncPlugin {
         val serviceIntent = Intent("com.android.vending.billing.InAppBillingService.BIND")
         serviceIntent.`package` = "com.android.vending"
         if (!context.bindService(serviceIntent, billingServiceConnection, Context.BIND_AUTO_CREATE)) {
-            App.log.severe("Couldn't connect to Google Play billing service")
+            Logger.log.severe("Couldn't connect to Google Play billing service")
             return false
         }
 
@@ -46,7 +47,7 @@ class ICloudSyncPlugin: ISyncPlugin {
                 try {
                     billingServiceLock.wait()
                 } catch(e: InterruptedException) {
-                    App.log.log(Level.SEVERE, "Couldn't wait for Google Play billing service", e)
+                    Logger.log.log(Level.SEVERE, "Couldn't wait for Google Play billing service", e)
                     return false
                 }
         }
@@ -57,12 +58,12 @@ class ICloudSyncPlugin: ISyncPlugin {
             billingService?.let {
                 val subscription = SubscriptionManager(context, it)
                 if (subscription.isValid()) {
-                    App.log.info("Valid license found: ${subscription.info.status}")
+                    Logger.log.info("Valid license found: ${subscription.info.status}")
                     return true
                 }
             }
         } catch(e: BillingException) {
-            App.log.log(Level.WARNING, "Couldn't determine subscription state", e)
+            Logger.log.log(Level.WARNING, "Couldn't determine subscription state", e)
             if (e.cause is DeadObjectException) {
                 // ignore DeadObjectExceptions and restart sync as soon as possible
                 syncResult.stats.numIoExceptions++
@@ -99,7 +100,7 @@ class ICloudSyncPlugin: ISyncPlugin {
             try {
                 context.unbindService(billingServiceConnection)
             } catch(e: IllegalArgumentException) {
-                App.log.log(Level.SEVERE, "Couldn't unbind Google Play service", e)
+                Logger.log.log(Level.SEVERE, "Couldn't unbind Google Play service", e)
             }
         }
     }

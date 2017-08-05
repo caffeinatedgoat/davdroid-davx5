@@ -13,12 +13,12 @@ import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import at.bitfire.davdroid.App
 import at.bitfire.davdroid.BuildConfig
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.SubscriptionManager
 import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo
 import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo.Status
+import at.bitfire.davdroid.log.Logger
 import com.android.vending.billing.IInAppBillingService
 import kotlinx.android.synthetic.icloud.activity_subscription.*
 import org.json.JSONObject
@@ -60,7 +60,7 @@ class SubscriptionActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<S
             try {
                 startIntentSender(it.intentSender, Intent(), 0, 0, 0)
             } catch(e: IntentSender.SendIntentException) {
-                App.log.log(Level.SEVERE, "Couldn't start in-app billing intent", e)
+                Logger.log.log(Level.SEVERE, "Couldn't start in-app billing intent", e)
             }
         }
     }
@@ -132,7 +132,7 @@ class SubscriptionActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<S
             val serviceIntent = Intent("com.android.vending.billing.InAppBillingService.BIND")
             serviceIntent.`package` = "com.android.vending"
             if (!context.bindService(serviceIntent, this, Context.BIND_AUTO_CREATE)) {
-                App.log.severe("Couldn't connect to Google Play billing service")
+                Logger.log.severe("Couldn't connect to Google Play billing service")
 
                 val data = BillingData()
                 data.error = context.getString(R.string.subscription_management_play_connection_error)
@@ -161,7 +161,7 @@ class SubscriptionActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<S
                     val bundle = service.getBuyIntent(3, BuildConfig.APPLICATION_ID, SKU_LIST[0], "inapp", null)
                     data.buyIntent = bundle.getParcelable("BUY_INTENT")
                 } catch(e: Exception) {
-                    App.log.log(Level.WARNING, "Couldn't retrieve product data from Google Play", e)
+                    Logger.log.log(Level.WARNING, "Couldn't retrieve product data from Google Play", e)
                     data.error = context.getString(R.string.subscription_management_play_connection_error)
                 }
             }

@@ -1,22 +1,16 @@
 package at.bitfire.davdroid
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.os.RemoteException;
-import android.support.annotation.NonNull;
-
-import com.android.vending.billing.IInAppBillingService;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
-
-import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo.Status;
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.os.RemoteException
+import at.bitfire.davdroid.SubscriptionManager.SubscriptionInfo.Status
+import at.bitfire.davdroid.log.Logger
+import com.android.vending.billing.IInAppBillingService
+import org.json.JSONException
+import org.json.JSONObject
+import java.util.*
+import java.util.logging.Level
 
 class SubscriptionManager(
         val context: Context,
@@ -32,7 +26,7 @@ class SubscriptionManager(
         val pm = context.packageManager
         try {
             val packageInfo = pm.getPackageInfo(BuildConfig.APPLICATION_ID, 0)
-            App.log.fine("First installed at ${packageInfo.firstInstallTime}")
+            Logger.log.fine("First installed at ${packageInfo.firstInstallTime}")
 
             info.trialExpiration = packageInfo.firstInstallTime + TRIAL_PERIOD
             info.trialExpiration?.let {
@@ -40,7 +34,7 @@ class SubscriptionManager(
                     info.status = Status.TRIAL
             }
         } catch(e: PackageManager.NameNotFoundException) {
-            App.log.log(Level.SEVERE, "Can't find local package", e)
+            Logger.log.log(Level.SEVERE, "Can't find local package", e)
         }
 
         processPurchases("inapp")

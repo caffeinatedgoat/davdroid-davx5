@@ -1,8 +1,8 @@
 package at.bitfire.davdroid.ui.setup;
 
+import android.app.Fragment
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ class ICloudLoginCredentialsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val v = inflater.inflate(R.layout.login_credentials_fragment, container, false)
 
-        val tf = Typeface.createFromAsset(context.assets, "fonts/BebasNeue_Light.ttf")
+        val tf = Typeface.createFromAsset(activity.assets, "fonts/BebasNeue_Light.ttf")
         v.login_title.typeface = tf
 
         v.login_password_hint.movementMethod = LinkMovementMethod.getInstance()
@@ -42,7 +42,7 @@ class ICloudLoginCredentialsFragment: Fragment() {
             valid = false
         }
 
-        val password = v.url_password.text.toString()
+        val password = v.url_password.getText().toString()
         if (password.isEmpty()) {
             v.url_password.setError(getString(R.string.login_password_required))
             valid = false
@@ -56,9 +56,7 @@ class ICloudLoginCredentialsFragment: Fragment() {
 
 
     class Factory: ILoginCredentialsFragment {
-
         override fun getFragment() = ICloudLoginCredentialsFragment()
-
     }
 
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="at.bitfire.davdroid"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+
+        <meta-data android:name="android.content.APP_RESTRICTIONS"
+                   android:resource="@xml/app_restrictions" />
+
+    </application>
+
+</manifest>

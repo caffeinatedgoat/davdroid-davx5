@@ -16,13 +16,10 @@
         <item name="colorPrimary">@color/blue500</item>
         <item name="colorPrimaryDark">@color/blue900</item>
         <item name="colorAccent">@color/amberA700</item>
-        <item name="android:textColorPrimary">@drawable/text_color</item>
-        <item name="android:textColorSecondary">@color/grey700</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
-    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    </style>
+    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <color name="actionBarButton">#FFFFFF</color>
 
 

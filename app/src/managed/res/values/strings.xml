@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2013 – 2015 Ricki Hirner (bitfire web engineering).
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the GNU Public License v3.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<resources>
+
+    <!-- core strings -->
+    <string name="app_name">Managed DAVdroid</string>
+    <string name="account_type">com.davdroid</string>
+    <string name="account_type_address_book">com.davdroid.address_book</string>
+    <string name="address_books_authority">com.davdroid.addressbooks</string>
+    <string name="authority_log_provider">com.davdroid.log</string>
+
+    <!-- restrictions (EMM backend) -->
+    <string name="restriction_license">License</string>
+    <string name="restriction_license_description">License data (JSON)</string>
+    <string name="restriction_license_signature">License signature</string>
+    <string name="restriction_license_signature_description">Digital signature required to validate the license (Base64)</string>
+    <string name="restriction_organization">Organization</string>
+    <string name="restriction_organization_description">Organization display name</string>
+    <string name="restriction_logo_url">Logo URL</string>
+    <string name="restriction_logo_url_description">HTTP(S) URL of organization logo (JPEG/PNG)</string>
+
+    <string name="restriction_support_homepage_url">Support homepage URL</string>
+    <string name="restriction_support_homepage_url_description">HTTP(S) URL of support homepage (Intranet page describing how to use DAVdroid)</string>
+    <string name="restriction_support_email_address">Support email address</string>
+    <string name="restriction_support_phone_number">Support phone number</string>
+    <string name="restriction_support_phone_number_description">Support phone number (format: +1 234 5678901)</string>
+
+    <string name="restriction_login_base_url">CalDAV/CardDAV base URL</string>
+    <string name="restriction_login_base_url_description">Starting URL for CalDAV/CardDAV service detection</string>
+    <string name="restriction_login_user_name">Default user name</string>
+    <string name="restriction_login_user_name_description">Pre-filled user name for login</string>
+    <string name="restriction_max_accounts">Max. accounts</string>
+    <string name="restriction_max_accounts_description">Maximum number of DAVdroid accounts per user</string>
+
+    <string name="restriction_override_proxy">Override proxy</string>
+    <string name="restriction_override_proxy_description">Whether to use a custom proxy server instead of the device-default proxy server</string>
+    <string name="restriction_override_proxy_host">Override proxy: host name</string>
+    <string name="restriction_override_proxy_host_description">HTTP proxy host name</string>
+    <string name="restriction_override_proxy_port">Override proxy: port</string>
+    <string name="restriction_override_proxy_port_description">HTTP proxy port</string>
+
+    <string name="restriction_wifi_only">Sync over WiFi only</string>
+    <string name="restriction_wifi_only_description">Whether synchronization is only run when WiFi is connected</string>
+    <string name="restriction_wifi_only_ssids">Sync over WiFi only: SSIDs</string>
+    <string name="restriction_wifi_only_ssids_description">Comma-separated list of allowed WiFi SSIDs ("wifi1,wifi2")</string>
+
+    <string name="restriction_contact_group_method">Contact group method</string>
+    <string name="restriction_contact_group_method_description">How contact groups are stored on the CardDAV server</string>
+
+    <string name="restriction_manage_calendar_colors">Manage calendar colors</string>
+    <string name="restriction_manage_calendar_colors_description">Whether DAVdroid shall set the calendar colors sent by the server locally</string>
+    <string name="restriction_event_colors">Event colors</string>
+    <string name="restriction_event_colors_description">Whether to enable per-event color support (may crash bugged calendar apps)</string>
+
+    <!-- notifications -->
+    <string name="license_invalid">Invalid license</string>
+    <string name="license_contact_it_support">Contact your IT department</string>
+    <string name="license_contact_it_support_email">Email</string>
+    <string name="license_contact_it_support_phone">Call support</string>
+
+    <!-- other UI -->
+    <string name="navigation_drawer_managed_configuration">Managed configuration</string>
+    <string name="navigation_drawer_web_support">Support info</string>
+    <string name="navigation_drawer_phone_support">Support hotline</string>
+    <string name="navigation_drawer_email_support">Email support</string>
+
+    <string name="about_license_info_html"><![CDATA[Licensed for up to <b>%1$d users</b> who work for <b>%2$s</b>.]]></string>
+    <string name="about_license_invalid_license">No valid license could be found. Please contact your IT department.</string>
+    <string name="about_license_short_terms">Must not be sub-licensed. If you\'re unsure whether this license has been issued for you, please contact us over https://www.davdroid.com.</string>
+    <string name="about_license_valid_through">License valid through: %s</string>
+
+    <string name="login_managed_config_info_html"><![CDATA[You\'re using an automatic configuration provided by <b>%s</b>.]]></string>
+    <string name="login_managed_config_waiting">Waiting for organization settings …</string>
+    <string name="login_managed_config_please_log_in">Please log in</string>
+
+</resources>

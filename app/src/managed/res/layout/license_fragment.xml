@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Ricki Hirner (bitfire web engineering).
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the GNU Public License v3.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginBottom="8dp"
+          android:background="?android:attr/dividerVertical" />
+
+    <TextView
+       android:id="@+id/license_info"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="8dp"
+       android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+       android:text="@string/about_license_info_html"/>
+
+    <TextView
+        android:id="@+id/license_expires"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/about_license_valid_through"/>
+
+    <TextView
+        android:id="@+id/license_short_terms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_license_short_terms"/>
+
+</LinearLayout>

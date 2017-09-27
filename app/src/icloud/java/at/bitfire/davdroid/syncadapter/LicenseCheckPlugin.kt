@@ -8,12 +8,13 @@ import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import at.bitfire.davdroid.*
 import at.bitfire.davdroid.log.Logger
+import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.DebugInfoActivity
 import at.bitfire.davdroid.ui.SubscriptionActivity
 import com.android.vending.billing.IInAppBillingService
 import java.util.logging.Level
 
-class ICloudSyncPlugin: ISyncPlugin {
+class LicenseCheckPlugin: ISyncPlugin {
 
     var billingService: IInAppBillingService? = null
     val billingServiceLock = Object()
@@ -32,7 +33,7 @@ class ICloudSyncPlugin: ISyncPlugin {
     }
 
 
-    override fun beforeSync(context: Context, syncResult: SyncResult): Boolean {
+    override fun beforeSync(context: Context, settings: ISettings, syncResult: SyncResult): Boolean {
         // connect to Google Play billing service
         val serviceIntent = Intent("com.android.vending.billing.InAppBillingService.BIND")
         serviceIntent.`package` = "com.android.vending"
@@ -95,7 +96,7 @@ class ICloudSyncPlugin: ISyncPlugin {
         return false
     }
 
-    override fun afterSync(context: Context, syncResult: SyncResult) {
+    override fun afterSync(context: Context, settings: ISettings, syncResult: SyncResult) {
         billingService?.let {
             try {
                 context.unbindService(billingServiceConnection)

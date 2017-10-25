@@ -19,6 +19,10 @@ class RestrictionsProvider(
         val settings: Settings
 ): Provider {
 
+    companion object {
+        val EMM_RESTRICTIONS = "emm_restrictions"
+    }
+
     private var config: Bundle? = null
 
     private val emmReceiver = object: BroadcastReceiver() {
@@ -41,13 +45,16 @@ class RestrictionsProvider(
         val manager = settings.getSystemService(Context.RESTRICTIONS_SERVICE) as RestrictionsManager
         val config = manager.applicationRestrictions
 
-        /*val config = Bundle(3)
-        config.putString("license", "{\"id\":1,\"organization\":\"bitfire web engineering\",\"expires\":1893456000}")
-        config.putString("license_signature", "MEUCIQCQQKlc5eP+tPaLjGYTFklVU7zLjdVxUtpWjcfiPVJy9gIgALhww1mzSQHkC7w5+AwgnUnwkHz0ySKUfXoMx/X5w/4=")
-        config.putString("login_baseURL", "http://ubuntu.lan/nextcloud/remote.php/dav")*/
+        if (!config.isEmpty)
+            config.putBoolean(EMM_RESTRICTIONS, true)
 
         Logger.log.log(Level.INFO, "Active app restrictions", config)
         this.config = config
+    }
+
+    override fun forceReload() {
+        loadRestrictions()
+        settings.onReload()
     }
 
     fun hasRestrictions() = config?.let { !it.isEmpty } ?: false

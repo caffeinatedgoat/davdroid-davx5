@@ -17,7 +17,7 @@ import java.io.File
 import java.util.logging.Level
 
 class ConfigFileProvider(
-        settings: Settings
+        val settings: Settings
 ): Provider {
 
     val fileName = "davdroid-config.json"
@@ -41,6 +41,11 @@ class ConfigFileProvider(
 
     override fun close() {
         fileObserver.stopWatching()
+    }
+
+    override fun forceReload() {
+        reload()
+        settings.onReload()
     }
 
 

@@ -22,9 +22,7 @@ import android.support.v4.content.Loader
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import at.bitfire.davdroid.LicenseChecker
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
@@ -39,12 +37,29 @@ import java.util.logging.Level
 
 class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            inflater.inflate(R.layout.license_fragment, container, false)!!
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val v = inflater.inflate(R.layout.license_fragment, container, false)!!
+        setHasOptionsMenu(true)
+        return v
+    }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loaderManager.initLoader(0, null, this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_license, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.managed_configuration -> {
+                startActivity(Intent(activity, ManagedConfigActivity::class.java))
+                return true
+            }
+        }
+        return false
     }
 
 

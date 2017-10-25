@@ -20,8 +20,13 @@ class SettingsProviderFactory: ISettingsProviderFactory {
         if (restrictions.hasRestrictions()) {
             providers += restrictions
             return providers
-        } else
+        } else {
+            // shut down EMM provider
             restrictions.close()
+
+            // use network config provider
+            providers += NetworkConfigProvider(settings)
+        }
 
         // use local config file instead
         providers += ConfigFileProvider(settings)

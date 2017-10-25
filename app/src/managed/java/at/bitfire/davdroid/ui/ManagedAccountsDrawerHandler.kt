@@ -64,6 +64,7 @@ class ManagedAccountsDrawerHandler: IAccountsDrawerHandler {
                         Logger.log.log(Level.WARNING, "Couldn't call phone support", e)
                     }
                 }
+
             R.id.nav_email_support ->
                 settings?.getString(App.SUPPORT_EMAIL, null)?.let { email ->
                     try {
@@ -75,6 +76,7 @@ class ManagedAccountsDrawerHandler: IAccountsDrawerHandler {
                         Logger.log.log(Level.WARNING, "Couldn't mail phone support", e)
                     }
                 }
+
         }
 
         return true

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © Ricki Hirner (bitfire web engineering).
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the GNU Public License v3.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/reload"
+        android:title="@string/managed_config_reload_configuration"
+        app:showAsAction="never"
+        android:enabled="false"
+        android:onClick="reloadConfig"/>
+
+    <item
+        android:id="@+id/reset"
+        app:showAsAction="never"
+        android:visible="false"
+        android:title="@string/managed_config_reset_network_config_url"
+        android:onClick="resetConfigURL"/>
+
+</menu>

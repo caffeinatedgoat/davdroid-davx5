@@ -75,9 +75,21 @@
     <string name="about_license_invalid_license">No valid license could be found. Please contact your IT department.</string>
     <string name="about_license_short_terms">Must not be sub-licensed. If you\'re unsure whether this license has been issued for you, please contact us over https://www.davdroid.com.</string>
     <string name="about_license_valid_through">License valid through: %s</string>
+    <string name="about_managed_configuration">Managed configuration</string>
 
     <string name="login_managed_config_info_html"><![CDATA[You\'re using an automatic configuration provided by <b>%s</b>.]]></string>
     <string name="login_managed_config_waiting">Waiting for organization settings …</string>
     <string name="login_managed_config_please_log_in">Please log in</string>
+
+    <string name="managed_config_reload_configuration">Reload configuration</string>
+    <string name="managed_config_reloading_configuration">Reloading configuration</string>
+    <string name="managed_config_reset_network_config_url">Reset network configuration URL</string>
+    <string name="managed_config_configuration_type">Configuration type:</string>
+    <string name="managed_config_configuration_type_emm">EMM restrictions</string>
+    <string name="managed_config_configuration_type_network">Network config file</string>
+    <string name="managed_config_network_configuration">Network configuration</string>
+    <string name="managed_config_network_configuration_url">Taking configuration from URL:</string>
+    <string name="managed_config_verifying_network_config">Verifying network configuration…</string>
+    <string name="managed_config_network_config_url_saved">Network configuration URL saved</string>
 
 </resources>

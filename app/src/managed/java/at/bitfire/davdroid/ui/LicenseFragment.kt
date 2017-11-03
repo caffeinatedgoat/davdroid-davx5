@@ -43,7 +43,7 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
         return v
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loaderManager.initLoader(0, null, this)
     }
@@ -64,7 +64,7 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
 
 
     override fun onCreateLoader(code: Int, args: Bundle?) =
-            LicenseInfoLoader(activity)
+            LicenseInfoLoader(activity!!)
 
     override fun onLoadFinished(loader: Loader<LicenseInfo>?, info: LicenseInfo?) {
         Logger.log.log(Level.INFO, "LICENSE", info)

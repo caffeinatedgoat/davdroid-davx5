@@ -79,6 +79,7 @@
 
     <string name="login_managed_config_info_html"><![CDATA[You\'re using an automatic configuration provided by <b>%s</b>.]]></string>
     <string name="login_managed_config_waiting">Waiting for organization settings …</string>
+    <string name="login_managed_config_not_for_single_users">Doesn\'t work? Contact your IT department.\nManaged DAVdroid is not intended for single users.</string>
     <string name="login_managed_config_please_log_in">Please log in</string>
 
     <string name="managed_config_reload_configuration">Reload configuration</string>

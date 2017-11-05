@@ -25,17 +25,19 @@
        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
        android:text="@string/about_license_info_html"/>
 
+
+    <TextView
+        android:id="@+id/license_domains"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@plurals/about_license_domains"/>
+
     <TextView
         android:id="@+id/license_expires"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/about_license_valid_through"/>
-
-    <TextView
-        android:id="@+id/license_short_terms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/about_license_short_terms"/>
 
 </LinearLayout>

@@ -61,6 +61,7 @@
 
     <!-- notifications -->
     <string name="license_invalid">Invalid license</string>
+    <string name="license_unlicensed_host_name">Host not covered by license</string>
     <string name="license_contact_it_support">Contact your IT department</string>
     <string name="license_contact_it_support_email">Email</string>
     <string name="license_contact_it_support_phone">Call support</string>
@@ -72,8 +73,11 @@
     <string name="navigation_drawer_email_support">Email support</string>
 
     <string name="about_license_info_html"><![CDATA[Licensed for up to <b>%1$d users</b> who work for <b>%2$s</b>.]]></string>
+    <plurals name="about_license_domains">
+        <item quantity="one">Intended for domain: %s</item>
+        <item quantity="other">Intended for domains: %s</item>
+    </plurals>
     <string name="about_license_invalid_license">No valid license could be found. Please contact your IT department.</string>
-    <string name="about_license_short_terms">Must not be sub-licensed. If you\'re unsure whether this license has been issued for you, please contact us over https://www.davdroid.com.</string>
     <string name="about_license_valid_through">License valid through: %s</string>
     <string name="about_managed_configuration">Managed configuration</string>
 

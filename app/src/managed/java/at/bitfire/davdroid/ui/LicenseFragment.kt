@@ -20,8 +20,6 @@ import android.support.v4.app.LoaderManager
 import android.support.v4.content.AsyncTaskLoader
 import android.support.v4.content.Loader
 import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.text.util.Linkify
 import android.view.*
 import at.bitfire.davdroid.LicenseChecker
 import at.bitfire.davdroid.R
@@ -72,17 +70,19 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
             if (info != null && info.valid) {
                 v.license_info.text = Html.fromHtml(getString(R.string.about_license_info_html, info.users, info.organization))
 
+                if (info.domains?.let { domains ->
+                    v.license_domains.visibility = View.VISIBLE
+                    v.license_domains.text = resources.getQuantityString(R.plurals.about_license_domains, domains.size, domains.joinToString(", "))
+                } == null)
+                    v.license_domains.visibility = View.GONE
+
                 v.license_expires.visibility = View.VISIBLE
                 val dateStr = DateFormat.getDateInstance().format(Date(info.expires!! * 1000))
                 v.license_expires.text = getString(R.string.about_license_valid_through, dateStr)
-
-                v.license_short_terms.visibility = View.VISIBLE
-                v.license_short_terms.autoLinkMask = Linkify.WEB_URLS
-                v.license_short_terms.movementMethod = LinkMovementMethod.getInstance()
             } else {
                 v.license_info.text = getString(R.string.about_license_invalid_license)
+                v.license_domains.visibility = View.GONE
                 v.license_expires.visibility = View.GONE
-                v.license_short_terms.visibility = View.GONE
             }
         }
     }
@@ -94,8 +94,9 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
 
     data class LicenseInfo(
             val valid: Boolean,
-            val users: Int? = null,
             var organization: String? = null,
+            var domains: Set<String>? = null,
+            val users: Int? = null,
             var expires: Long? = null
     )
 
@@ -140,8 +141,9 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
             val checker = LicenseChecker(context)
             return if (settings?.let { checker.verifyLicense(it) } == true) {
                 LicenseInfo(true,
-                        checker.users,
                         checker.organization,
+                        checker.domains,
+                        checker.users,
                         checker.expiresAt)
             } else
                 LicenseInfo(false)

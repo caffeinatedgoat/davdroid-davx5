@@ -15,6 +15,7 @@ import at.bitfire.davdroid.log.Logger
 import okhttp3.CacheControl
 import okhttp3.HttpUrl
 import okhttp3.Request
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -26,6 +27,7 @@ class NetworkConfigProvider(
 
     companion object {
         val PREFS_FILE = "network_config"
+        val PREF_CACHED_CONFIG = "cached_config"
         val PREF_CONFIG_URL = "config_url"
     }
 
@@ -34,10 +36,24 @@ class NetworkConfigProvider(
     private val prefs: SharedPreferences
     private var configURL: HttpUrl? = null
 
-    private var config: JSONObject? = null
+    private val httpCacheControl = CacheControl.Builder()
+            .maxAge(1, TimeUnit.DAYS)
+            .build()
+
+    private lateinit var config: JSONObject
 
     init {
         prefs = settings.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE)
+
+        // start with a cached configuration, if possible
+        config = try {
+            JSONObject(prefs.getString(PREF_CACHED_CONFIG, ""))
+        } catch (ignored: JSONException) {
+            JSONObject()
+        }
+        Logger.log.log(Level.INFO, "Using cached configuration", config)
+
+        // reload configuration from network
         readConfigURL()
         reloadConfig()
 
@@ -45,14 +61,20 @@ class NetworkConfigProvider(
     }
 
     override fun close() {
-        executor.shutdown()
         prefs.unregisterOnSharedPreferenceChangeListener(this)
+
+        executor.shutdown()
+        try {
+            executor.awaitTermination(1, TimeUnit.HOURS)
+        } catch(ignored: InterruptedException) {}
     }
 
 
-    override fun onSharedPreferenceChanged(prefs: SharedPreferences?, s: String?) {
-        readConfigURL()
-        reloadConfig()
+    override fun onSharedPreferenceChanged(prefs: SharedPreferences?, key: String) {
+        if (key == PREF_CONFIG_URL) {
+            readConfigURL()
+            reloadConfig()
+        }
     }
 
     private fun readConfigURL() {
@@ -60,9 +82,7 @@ class NetworkConfigProvider(
         Logger.log.info("Using networking config URL: $configURL")
     }
 
-    private fun reloadConfig(cacheMode: CacheControl? = null) {
-        config = null
-
+    private fun reloadConfig(cacheControl: CacheControl = httpCacheControl) {
         configURL?.let { url ->
             executor.submit {
                 HttpClient.Builder(settings)
@@ -72,13 +92,7 @@ class NetworkConfigProvider(
                         val request = Request.Builder()
                                 .get()
                                 .url(url)
-
-                        if (cacheMode == null) {
-                            request.cacheControl(CacheControl.Builder()
-                                    .maxAge(1, TimeUnit.SECONDS)
-                                    .build())
-                        } else
-                            request.cacheControl(cacheMode)
+                                .cacheControl(cacheControl)
 
                         client.okHttpClient.newCall(request.build()).execute().use { response ->
                             if (!response.isSuccessful)
@@ -87,19 +101,19 @@ class NetworkConfigProvider(
                             response.body()?.let {
                                 // parse configuration file
                                 config = JSONObject(it.string())
-
                                 Logger.log.log(Level.INFO, "Using network configuration", config)
+
+                                // save into cache
+                                prefs   .edit()
+                                        .putString(PREF_CACHED_CONFIG, config.toString())
+                                        .apply()
 
                                 // notify SettingsManager about new config
                                 settings.onReload()
                             }
                         }
                     } catch(e: Exception) {
-                        if (cacheMode == null) {
-                            Logger.log.log(Level.WARNING, "Couldn't load network config, trying cached version", e)
-                            reloadConfig(CacheControl.FORCE_CACHE)
-                        } else
-                            Logger.log.log(Level.WARNING, "Couldn't load network config")
+                        Logger.log.log(Level.WARNING, "Couldn't load network config", e)
                     }
                 }
             }

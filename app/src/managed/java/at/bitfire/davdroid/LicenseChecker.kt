@@ -21,6 +21,7 @@ import java.security.spec.X509EncodedKeySpec
 import java.text.DateFormat
 import java.util.*
 import java.util.logging.Level
+import kotlin.collections.LinkedHashSet
 
 class LicenseChecker(
         val context: Context
@@ -33,8 +34,9 @@ class LicenseChecker(
 
     private val publicKey: PublicKey
 
-    var users: Int? = null
     var organization: String? = null
+    var domains: Set<String>? = null
+    var users: Int? = null
     var expiresAt: Long? = null
 
 
@@ -47,6 +49,8 @@ class LicenseChecker(
     fun verifyLicense(settings: ISettings): Boolean {
         val license = settings.getString(SETTING_LICENSE, null) ?: return false
         val licenseSignature = settings.getString(SETTING_LICENSE_SIGNATURE, null) ?: return false
+
+        Logger.log.log(Level.FINE, "Got license and signature", arrayOf(license, licenseSignature))
 
         // verify license
         var validLicense = false
@@ -66,6 +70,13 @@ class LicenseChecker(
             try {
                 val json = JSONObject(license)
                 organization = json.getString("organization")
+                if (json.has("domains"))
+                    json.getJSONArray("domains").let {
+                        val domains = LinkedHashSet<String>(it.length())
+                        for (i in 0 until it.length())
+                            domains += it.optString(i)
+                        this.domains = domains
+                    }
                 users = json.getInt("users")
 
                 val expires = json.getLong("expires")

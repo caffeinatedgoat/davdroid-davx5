@@ -76,7 +76,7 @@ class LicenseCheckPlugin: ISyncPlugin {
         // no valid license found, show notification
         val notify = NotificationCompat.Builder(context)
                 .setLargeIcon(App.getLauncherBitmap(context))
-                .setSmallIcon(R.drawable.ic_account_circle_white)
+                .setSmallIcon(R.drawable.ic_sync_error_notification)
                 .setContentTitle(context.getString(R.string.subscription_notification_title))
                 .setContentText(context.getString(R.string.subscription_notification_text))
                 .setCategory(NotificationCompat.CATEGORY_STATUS)
@@ -86,7 +86,7 @@ class LicenseCheckPlugin: ISyncPlugin {
         exception?.let {
             val intent = Intent(context, DebugInfoActivity::class.java)
             intent.putExtra(DebugInfoActivity.KEY_THROWABLE, it)
-            notify.addAction(R.drawable.ic_error_light, context.getString(R.string.subscription_notification_show_details),
+            notify.addAction(R.drawable.ic_sync_error_notification, context.getString(R.string.subscription_notification_show_details),
                     PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT))
         }
 

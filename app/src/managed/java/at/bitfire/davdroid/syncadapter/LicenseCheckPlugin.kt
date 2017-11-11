@@ -62,7 +62,7 @@ class LicenseCheckPlugin: ISyncPlugin {
     private fun notifyLicenseProblem(context: Context, settings: ISettings, nm: NotificationManagerCompat, msgId: Int, subText: String? = null) {
         val notify = NotificationCompat.Builder(context)
                 .setLargeIcon(App.getLauncherBitmap(context))
-                .setSmallIcon(R.drawable.ic_error_light)
+                .setSmallIcon(R.drawable.ic_sync_error_notification)
                 .setContentTitle(context.getString(msgId))
                 .setContentText(context.getString(R.string.license_contact_it_support))
                 .setSubText(subText)

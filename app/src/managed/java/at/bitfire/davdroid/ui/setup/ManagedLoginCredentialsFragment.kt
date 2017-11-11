@@ -53,7 +53,11 @@ class ManagedLoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks
         val view = view ?: return
         val settings = result ?: return
 
-        view.logo.setImageBitmap(settings.logo)
+        if (settings.logo != null) {
+            view.logo.setImageBitmap(settings.logo)
+            view.logo.visibility = View.VISIBLE
+        } else
+            view.logo.visibility = View.GONE
         view.text.text = Html.fromHtml(getString(R.string.login_managed_config_info_html, settings.organization ?: "DAVdroid"))
 
         StringUtils.stripToNull(settings.userName)?.let {

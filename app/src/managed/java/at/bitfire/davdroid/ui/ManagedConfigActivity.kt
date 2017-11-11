@@ -91,6 +91,7 @@ class ManagedConfigActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<
     fun resetConfigURL(item: MenuItem) {
         getSharedPreferences(NetworkConfigProvider.PREFS_FILE, Context.MODE_PRIVATE).edit()
                 .remove(NetworkConfigProvider.PREF_CONFIG_URL)
+                .remove(NetworkConfigProvider.PREF_CACHED_CONFIG)
                 .apply()
         loaderManager.restartLoader(0, null, this)
     }

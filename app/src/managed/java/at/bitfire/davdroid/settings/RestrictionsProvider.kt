@@ -42,8 +42,8 @@ class RestrictionsProvider(
     }
 
     fun loadRestrictions() {
-        val manager = settings.getSystemService(Context.RESTRICTIONS_SERVICE) as RestrictionsManager
-        val config = manager.applicationRestrictions
+        val manager = settings.getSystemService(Context.RESTRICTIONS_SERVICE) as RestrictionsManager?
+        val config = manager?.applicationRestrictions ?: Bundle()
 
         if (!config.isEmpty)
             config.putBoolean(EMM_RESTRICTIONS, true)

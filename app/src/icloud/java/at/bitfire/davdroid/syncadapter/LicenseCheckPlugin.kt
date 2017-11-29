@@ -5,11 +5,11 @@ import android.content.*
 import android.os.DeadObjectException
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
 import at.bitfire.davdroid.*
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.DebugInfoActivity
+import at.bitfire.davdroid.ui.NotificationUtils
 import at.bitfire.davdroid.ui.SubscriptionActivity
 import com.android.vending.billing.IInAppBillingService
 import java.util.logging.Level
@@ -74,7 +74,7 @@ class LicenseCheckPlugin: ISyncPlugin {
         }
 
         // no valid license found, show notification
-        val notify = NotificationCompat.Builder(context)
+        val notify = NotificationCompat.Builder(context, NotificationUtils.CHANNEL_SYNC_PROBLEMS)
                 .setLargeIcon(App.getLauncherBitmap(context))
                 .setSmallIcon(R.drawable.ic_sync_error_notification)
                 .setContentTitle(context.getString(R.string.subscription_notification_title))
@@ -90,7 +90,7 @@ class LicenseCheckPlugin: ISyncPlugin {
                     PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT))
         }
 
-        val nm = NotificationManagerCompat.from(context)
+        val nm = NotificationUtils.createChannels(context)
         nm.notify(Constants.NOTIFICATION_SUBSCRIPTION, notify.build())
 
         return false

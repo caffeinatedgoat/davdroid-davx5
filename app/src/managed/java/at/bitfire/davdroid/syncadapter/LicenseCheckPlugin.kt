@@ -1,12 +1,12 @@
 package at.bitfire.davdroid.syncadapter
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SyncResult
 import android.net.Uri
 import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.Constants
 import at.bitfire.davdroid.LicenseChecker
@@ -16,12 +16,13 @@ import at.bitfire.davdroid.model.ServiceDB
 import at.bitfire.davdroid.model.ServiceDB.Collections
 import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.AboutActivity
+import at.bitfire.davdroid.ui.NotificationUtils
 import okhttp3.HttpUrl
 
 class LicenseCheckPlugin: ISyncPlugin {
 
     override fun beforeSync(context: Context, settings: ISettings, syncResult: SyncResult): Boolean {
-        val nm = NotificationManagerCompat.from(context)
+        val nm = NotificationUtils.createChannels(context)
 
         val checker = LicenseChecker(context)
         if (checker.verifyLicense(settings)) {
@@ -59,8 +60,8 @@ class LicenseCheckPlugin: ISyncPlugin {
     }
 
 
-    private fun notifyLicenseProblem(context: Context, settings: ISettings, nm: NotificationManagerCompat, msgId: Int, subText: String? = null) {
-        val notify = NotificationCompat.Builder(context)
+    private fun notifyLicenseProblem(context: Context, settings: ISettings, nm: NotificationManager, msgId: Int, subText: String? = null) {
+        val notify = NotificationCompat.Builder(context, NotificationUtils.CHANNEL_SYNC_PROBLEMS)
                 .setLargeIcon(App.getLauncherBitmap(context))
                 .setSmallIcon(R.drawable.ic_sync_error_notification)
                 .setContentTitle(context.getString(msgId))

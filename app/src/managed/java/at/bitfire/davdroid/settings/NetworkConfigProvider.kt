@@ -14,7 +14,6 @@ import android.content.SharedPreferences
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
 import android.util.Base64
-import at.bitfire.cert4android.CustomCertManager
 import at.bitfire.cert4android.CustomCertService
 import at.bitfire.davdroid.DavUtils
 import at.bitfire.davdroid.HttpClient
@@ -26,18 +25,11 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.xbill.DNS.Lookup
 import org.xbill.DNS.Type
-import java.io.ByteArrayInputStream
-import java.io.File
-import java.io.FileOutputStream
 import java.net.URI
-import java.security.KeyStore
-import java.security.cert.CertificateFactory
-import java.security.cert.X509Certificate
 import java.util.concurrent.Executors
 import java.util.concurrent.RejectedExecutionException
 import java.util.concurrent.TimeUnit
 import java.util.logging.Level
-import kotlin.concurrent.thread
 
 class NetworkConfigProvider(
         val settings: Settings
@@ -114,8 +106,12 @@ class NetworkConfigProvider(
                 executor.submit {
                     // no custom configuration URL, try auto-discovery:
                     // 1. Unicast DNS (SRV/TXT)
-                    DavUtils.selectSRVRecord(Lookup(UNICAST_NAME, Type.SRV).run())?.let { srv ->
-                        val path = DavUtils.pathsFromTXTRecords(Lookup(UNICAST_NAME, Type.TXT).run()).firstOrNull() ?: "/"
+                    val srvLookup = Lookup(UNICAST_NAME, Type.SRV)
+                    DavUtils.prepareLookup(settings, srvLookup)
+                    DavUtils.selectSRVRecord(srvLookup.run())?.let { srv ->
+                        val txtLookup = Lookup(UNICAST_NAME, Type.TXT)
+                        DavUtils.prepareLookup(settings, txtLookup)
+                        val path = DavUtils.pathsFromTXTRecords(txtLookup.run()).firstOrNull() ?: "/"
                         val uri = URI("https", null, srv.target.toString(true), srv.port, path, null, null)
                         Logger.log.info("Found network configuration URL by $UNICAST_NAME SRV/TXT: $uri")
                         configURL = HttpUrl.get(uri)

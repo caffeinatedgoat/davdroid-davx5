@@ -3,7 +3,6 @@ package at.bitfire.davdroid.ui
 import android.app.LoaderManager
 import android.app.PendingIntent
 import android.content.*
-import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
@@ -34,9 +33,6 @@ class SubscriptionActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<S
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_subscription)
-
-        val tf = Typeface.createFromAsset(assets, "fonts/BebasNeue_Light.ttf")
-        heading.typeface = tf
 
         get_in_google_play.setOnClickListener { buyLicenseInMarket() }
 

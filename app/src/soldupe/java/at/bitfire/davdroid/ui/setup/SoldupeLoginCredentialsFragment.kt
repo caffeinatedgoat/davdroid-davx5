@@ -26,31 +26,31 @@ class SoldupeLoginCredentialsFragment: Fragment() {
         val v = inflater.inflate(R.layout.login_credentials_fragment, container, false)
 
         v.login.setOnClickListener({ _ ->
-            validateLoginData()?.let { credentials ->
-                DetectConfigurationFragment.newInstance(credentials).show(fragmentManager, null)
+            validateLoginData()?.let { info ->
+                DetectConfigurationFragment.newInstance(info).show(fragmentManager, null)
             }
         })
 
         return v
     }
 
-    fun validateLoginData(): LoginCredentials? {
+    private fun validateLoginData(): LoginInfo? {
         var ok = true
 
         val userName = view.user_name.text.toString()
         if (userName.isBlank()) {
-            view.user_name.setError(getString(R.string.login_user_name_required))
+            view.user_name.error = getString(R.string.login_user_name_required)
             ok = false;
         }
 
-        val password = view.url_password.getText().toString()
+        val password = view.url_password.text.toString()
         if (password.isBlank()) {
-            view.url_password.setError(getString(R.string.login_password_required))
+            view.url_password.error = getString(R.string.login_password_required)
             ok = false;
         }
 
         return if (ok)
-            LoginCredentials(URI.create("https://cloud.soldupe.com/remote.php/dav/"), userName, password)
+            LoginInfo(URI.create("https://cloud.soldupe.com/remote.php/dav/"), userName, password)
         else
             null
     }

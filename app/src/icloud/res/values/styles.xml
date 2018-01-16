@@ -47,6 +47,7 @@
         <item name="android:textSize">48sp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:fontFamily">@font/bebas_neue</item>
     </style>
 
 </resources>

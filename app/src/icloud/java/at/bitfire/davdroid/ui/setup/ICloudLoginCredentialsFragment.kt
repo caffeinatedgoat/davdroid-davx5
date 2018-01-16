@@ -1,7 +1,6 @@
 package at.bitfire.davdroid.ui.setup;
 
 import android.app.Fragment
-import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -17,22 +16,19 @@ class ICloudLoginCredentialsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val v = inflater.inflate(R.layout.login_credentials_fragment, container, false)
 
-        val tf = Typeface.createFromAsset(activity.assets, "fonts/BebasNeue_Light.ttf")
-        v.login_title.typeface = tf
-
         v.login_password_hint.movementMethod = LinkMovementMethod.getInstance()
         v.login_password_hint.text = Html.fromHtml(getString(R.string.login_app_specific_password_hint))
 
         v.login.setOnClickListener {
-            validateLoginData()?.let { credentials ->
-                DetectConfigurationFragment.newInstance(credentials).show(fragmentManager, null)
+            validateLoginData()?.let { info ->
+                DetectConfigurationFragment.newInstance(info).show(fragmentManager, null)
             }
         }
 
         return v
     }
 
-    private fun validateLoginData(): LoginCredentials? {
+    private fun validateLoginData(): LoginInfo? {
         var valid = true
 
         val v = requireNotNull(view)
@@ -49,7 +45,7 @@ class ICloudLoginCredentialsFragment: Fragment() {
         }
 
         return if (valid)
-            LoginCredentials(URI.create("https://icloud.com/"), userName, password)
+            LoginInfo(URI.create("https://icloud.com/"), userName, password)
         else
             null
     }

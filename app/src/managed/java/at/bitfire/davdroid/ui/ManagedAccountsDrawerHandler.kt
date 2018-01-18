@@ -17,7 +17,6 @@ import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.settings.ISettings
-import org.apache.commons.lang3.StringUtils
 import java.util.logging.Level
 
 class ManagedAccountsDrawerHandler: IAccountsDrawerHandler {

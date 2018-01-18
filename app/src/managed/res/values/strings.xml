@@ -85,6 +85,8 @@
     <string name="login_managed_config_waiting">Waiting for organization settings …</string>
     <string name="login_managed_config_not_for_single_users">Doesn\'t work? Contact your IT department.\nManaged DAVdroid is not intended for single users.</string>
     <string name="login_managed_config_please_log_in">Please log in</string>
+    <string name="login_managed_config_select_certificate_info">Choose a client certificate which will be used for authentication.</string>
+    <string name="login_managed_config_certificate_selected">The client certificate %s will be used for authentication.</string>
 
     <string name="managed_config_reload_configuration">Reload configuration</string>
     <string name="managed_config_reloading_configuration">Reloading configuration</string>

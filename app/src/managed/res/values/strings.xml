@@ -36,6 +36,8 @@
     <string name="restriction_login_base_url_description">Starting URL for CalDAV/CardDAV service detection</string>
     <string name="restriction_login_user_name">Default user name</string>
     <string name="restriction_login_user_name_description">Pre-filled user name for login</string>
+    <string name="restriction_login_certificate_alias">Client certificate alias</string>
+    <string name="restriction_login_certificate_alias_description">Alias of existing client certificate to be used for login</string>
     <string name="restriction_max_accounts">Max. accounts</string>
     <string name="restriction_max_accounts_description">Maximum number of DAVdroid accounts per user</string>
 

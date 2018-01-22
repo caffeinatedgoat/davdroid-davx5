@@ -39,7 +39,7 @@ class LoginCredentialsFragment: Fragment() {
 
     }
 
-    var selectedCertificate: String? = null
+    private var selectedCertificate: String? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

@@ -43,9 +43,10 @@ class LoginInitFragment: Fragment(), LoaderManager.LoaderCallbacks<LoginSettings
 
     override fun onLoadFinished(loader: Loader<LoginSettings>, result: LoginSettings?) {
         result?.let {
-            fragmentManager.beginTransaction()
-                    .replace(android.R.id.content, LoginCredentialsFragment.newInstance(it))
-                    .commitAllowingStateLoss()
+            if (it.baseURL != null)
+                fragmentManager.beginTransaction()
+                        .replace(android.R.id.content, LoginCredentialsFragment.newInstance(it))
+                        .commitAllowingStateLoss()
         }
     }
 

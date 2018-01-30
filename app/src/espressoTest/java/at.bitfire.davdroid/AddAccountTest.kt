@@ -1,28 +1,24 @@
 package at.bitfire.davdroid;
 
+import android.accounts.Account
 import android.accounts.AccountManager
 import android.support.test.InstrumentationRegistry.getInstrumentation
+import android.support.test.espresso.Espresso.onData
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents
 import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
-import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
-import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.settings.Settings
 import at.bitfire.davdroid.ui.AccountsActivity
 import at.bitfire.davdroid.ui.StartupDialogFragment
 import at.bitfire.davdroid.ui.setup.LoginActivity
-import at.bitfire.ical4android.TaskProvider
-import org.hamcrest.Description
-import org.hamcrest.Matcher
-import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.containsString
+import org.hamcrest.Matchers.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -53,9 +49,7 @@ class AddAccountTest {
             android.Manifest.permission.READ_CALENDAR,
             android.Manifest.permission.WRITE_CALENDAR,
             android.Manifest.permission.READ_CONTACTS,
-            android.Manifest.permission.WRITE_CONTACTS,
-            TaskProvider.PERMISSION_READ_TASKS,
-            TaskProvider.PERMISSION_WRITE_TASKS
+            android.Manifest.permission.WRITE_CONTACTS
     )!!
 
     @Before
@@ -98,17 +92,20 @@ class AddAccountTest {
             onView(withId(R.id.urlpwd_password)).perform(scrollTo(), click(), typeText(password))
         }
         onView(withText("Login")).perform(click())
-
         onView(allOf(withId(R.id.create_account), withText("Create account"))).perform(click())
 
-        onView(withText(accountName)).perform(click())
+        onData(`is`(Account(accountName, getInstrumentation().targetContext.getString(R.string.account_type))))
+                .perform(click())
         for (addressBook in addressBooks)
-            onView(withText(containsString(addressBook))).perform(scrollTo(), click())
+            onView(withText(containsString(addressBook)))
+                    .perform(scrollTo(), click())
         for (calendar in calendars)
-            onView(withText(containsString(calendar))).perform(scrollTo(), click())
+            onView(withText(containsString(calendar)))
+                    .perform(scrollTo(), click())
         onView(withResourceName("sync_now")).perform(click())
     }
 
+    @LargeTest
     @Test
     fun testFastmail() = testService(
             null, "dah2zosu@fastmail.com", "vkd83x53txkew2fl",
@@ -116,6 +113,7 @@ class AddAccountTest {
             arrayOf("Espresso")
     )
 
+    @LargeTest
     @Test
     fun testCozy() = testService(
             "https://play.cozycloud.cc",
@@ -124,15 +122,16 @@ class AddAccountTest {
             arrayOf("wuffzack")
     )
 
-    /*@Test
+    @Test
     fun testICloud() = testService(
             "https://icloud.com",
             "gabriela.stockmann@bezirksblaetter.at", "soks-zisx-ylpr-lkrs",
-            arrayOf("613391272"),
+            arrayOf(),
             arrayOf("Privat", "Erinnerungen"),
             accountName = "gstockmann@me.com"
-    )*/
+    )
 
+    @LargeTest
     @Test
     fun testMailboxOrg() = testService(
             null,
@@ -141,6 +140,7 @@ class AddAccountTest {
             arrayOf("Kalender", "Aufgaben")
     )
 
+    @LargeTest
     @Test
     fun testMyKolab() = testService(
             null,
@@ -149,6 +149,16 @@ class AddAccountTest {
             arrayOf("Calendar", "Tasks")
     )
 
+    @LargeTest
+    @Test
+    fun testNextcloud() = testService(
+            "https://nc.dev001.net",
+            "test", "shineeW7",
+            arrayOf("Contacts"),
+            arrayOf("Personal")
+    )
+
+    @LargeTest
     @Test
     fun testPosteo() = testService(
             "https://posteo.de:8443",
@@ -156,17 +166,5 @@ class AddAccountTest {
             arrayOf("default addressbook"),
             arrayOf("Wurstkalender", "wawa")
     )
-
-
-    fun withCollectionName(value: String): Matcher<Any> {
-        return object: BoundedMatcher<Any, CollectionInfo>(CollectionInfo::class.java) {
-            override fun describeTo(description: Description) {
-                description.appendText("has display name " + value)
-            }
-
-            override fun matchesSafely(item: CollectionInfo) =
-                    item.displayName.equals(value)
-        }
-    }
 
 }

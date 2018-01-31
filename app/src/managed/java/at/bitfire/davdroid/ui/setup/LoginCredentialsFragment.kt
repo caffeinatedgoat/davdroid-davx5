@@ -9,6 +9,12 @@
 package at.bitfire.davdroid.ui.setup
 
 import android.app.Fragment
+import android.app.LoaderManager
+import android.content.AsyncTaskLoader
+import android.content.Context
+import android.content.Loader
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.security.KeyChain
@@ -16,13 +22,15 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import at.bitfire.davdroid.HttpClient
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import kotlinx.android.synthetic.managed.login_credentials_fragment.view.*
+import okhttp3.Request
 import java.net.URI
 import java.util.logging.Level
 
-class LoginCredentialsFragment: Fragment() {
+class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap> {
 
     companion object {
 
@@ -52,13 +60,12 @@ class LoginCredentialsFragment: Fragment() {
             selectedCertificate = it.getString(SELECTED_CERTIFICATE)
         }
 
-        // set logo
-        if (settings.logo != null) {
-            view.logo.setImageBitmap(settings.logo)
-            view.logo.visibility = View.VISIBLE
-        } else
-            view.logo.visibility = View.GONE
         view.text.text = Html.fromHtml(getString(R.string.login_managed_config_info_html, settings.organization ?: "DAVdroid"))
+
+        // load logo
+        view.logo.visibility = View.GONE
+        if (settings.logoURL != null)
+            loaderManager.initLoader(0, null, this)
 
         // validate base URL
         val baseURL: URI
@@ -141,6 +148,64 @@ class LoginCredentialsFragment: Fragment() {
             Logger.log.warning("Invalid login data")
             null
         }
+    }
+
+
+    override fun onCreateLoader(code: Int, args: Bundle?): Loader<Bitmap> {
+        val settings = arguments[ARG_LOGIN_SETTINGS] as LoginSettings
+        return BitmapLoader(activity, settings.logoURL!!)
+    }
+
+    override fun onLoadFinished(loader: Loader<Bitmap>?, result: Bitmap?) {
+        view?.logo?.let {
+            it.setImageBitmap(result)
+            it.visibility = if (result != null) View.VISIBLE else View.GONE
+        }
+    }
+
+    override fun onLoaderReset(loader: Loader<Bitmap>?) {
+        view?.logo?.let {
+            it.setImageBitmap(null)
+            it.visibility = View.GONE
+        }
+    }
+
+
+    class BitmapLoader(
+            context: Context,
+            private val logoURL: String
+    ): AsyncTaskLoader<Bitmap>(context) {
+
+        var logo: Bitmap? = null
+
+        override fun onStartLoading() {
+            if (logo != null)
+                deliverResult(logo)
+            else
+                forceLoad()
+        }
+
+        override fun loadInBackground(): Bitmap? {
+            try {
+                HttpClient.Builder(context)
+                        .withDiskCache()
+                        .build().use { client ->
+                    client.okHttpClient.newCall(Request.Builder()
+                            .get()
+                            .url(logoURL)
+                            .build()).execute().use { response ->
+                        if (response.isSuccessful)
+                            response.body()?.use {
+                                logo = BitmapFactory.decodeStream(it.byteStream())
+                            }
+                    }
+                }
+            } catch(e: Exception) {
+                Logger.log.log(Level.WARNING, "Couldn't load organization logo", e)
+            }
+            return logo
+        }
+
     }
 
 }

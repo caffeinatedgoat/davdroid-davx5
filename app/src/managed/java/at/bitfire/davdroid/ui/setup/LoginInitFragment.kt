@@ -12,21 +12,15 @@ import android.app.Fragment
 import android.app.LoaderManager
 import android.content.Context
 import android.content.Loader
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import at.bitfire.davdroid.App
-import at.bitfire.davdroid.HttpClient
 import at.bitfire.davdroid.R
-import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.ui.SettingsLoader
-import okhttp3.Request
 import org.apache.commons.lang3.StringUtils
 import java.net.URI
-import java.util.logging.Level
 
 class LoginInitFragment: Fragment(), LoaderManager.LoaderCallbacks<LoginSettings> {
 
@@ -58,39 +52,17 @@ class LoginInitFragment: Fragment(), LoaderManager.LoaderCallbacks<LoginSettings
             context: Context
     ): SettingsLoader<LoginSettings>(context) {
 
-        override fun loadInBackground(): LoginSettings? {
-            settings?.let {
-                var logo: Bitmap? = null
-                it.getString(App.ORGANIZATION_LOGO_URL, null)?.let { url ->
-                    try {
-                        HttpClient.Builder(context)
-                                .withDiskCache()
-                                .build().use { client ->
-                            client.okHttpClient.newCall(Request.Builder()
-                                    .get()
-                                    .url(url)
-                                    .build()).execute().use { response ->
-                                if (response.isSuccessful)
-                                    response.body()?.use {
-                                        logo = BitmapFactory.decodeStream(it.byteStream())
-                                    }
-                            }
-                        }
-                    } catch(e: Exception) {
-                        Logger.log.log(Level.WARNING, "Couldn't load organization logo", e)
-                    }
-                }
-
-                return LoginSettings(
+        override fun loadInBackground() =
+                settings?.let {
+                    LoginSettings(
                         StringUtils.stripToNull(it.getString(App.ORGANIZATION, null)),
-                        logo,
+                        StringUtils.stripToNull(it.getString(App.ORGANIZATION_LOGO_URL, null)),
                         StringUtils.stripToNull(it.getString(LoginSettings.BASE_URL, null)),
                         StringUtils.stripToNull(it.getString(LoginSettings.USER_NAME, null)),
                         StringUtils.stripToNull(it.getString(LoginSettings.CERTIFICATE_ALIAS, null))
-                )
-            }
-            return null
-        }
+                    )
+                }
+
     }
 
 

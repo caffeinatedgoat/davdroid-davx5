@@ -8,13 +8,12 @@
 
 package at.bitfire.davdroid.ui.setup
 
-import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
 
 data class LoginSettings(
         val organization: String?,
-        val logo: Bitmap?,
+        val logoURL: String?,
         val baseURL: String?,
         val userName: String?,
         var certificateAlias: String?
@@ -22,7 +21,7 @@ data class LoginSettings(
 
     constructor(parcel: Parcel): this(
             parcel.readString(),
-            parcel.readParcelable(Bitmap::class.java.classLoader),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString()) {
@@ -30,7 +29,7 @@ data class LoginSettings(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(organization)
-        parcel.writeParcelable(logo, flags)
+        parcel.writeString(logoURL)
         parcel.writeString(baseURL)
         parcel.writeString(userName)
         parcel.writeString(certificateAlias)

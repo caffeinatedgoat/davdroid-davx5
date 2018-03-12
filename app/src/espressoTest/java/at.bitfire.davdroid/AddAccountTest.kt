@@ -115,14 +115,6 @@ class AddAccountTest {
 
     @LargeTest
     @Test
-    fun testCozy() = testService(
-            "https://play.cozycloud.cc",
-            "me", "xJigUYIuBx",
-            arrayOf("Cozy Contacts"),
-            arrayOf("wuffzack")
-    )
-
-    @Test
     fun testICloud() = testService(
             "https://icloud.com",
             "gabriela.stockmann@bezirksblaetter.at", "soks-zisx-ylpr-lkrs",

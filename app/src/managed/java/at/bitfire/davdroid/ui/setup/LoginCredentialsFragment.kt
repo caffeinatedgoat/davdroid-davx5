@@ -8,16 +8,16 @@
 
 package at.bitfire.davdroid.ui.setup
 
-import android.app.Fragment
-import android.app.LoaderManager
-import android.content.AsyncTaskLoader
 import android.content.Context
-import android.content.Loader
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.security.KeyChain
+import android.support.v4.app.Fragment
+import android.support.v4.app.LoaderManager
+import android.support.v4.content.AsyncTaskLoader
+import android.support.v4.content.Loader
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -34,8 +34,8 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
 
     companion object {
 
-        private val ARG_LOGIN_SETTINGS = "login_settings"
-        private val SELECTED_CERTIFICATE = "selected_certificate"
+        private const val ARG_LOGIN_SETTINGS = "login_settings"
+        private const val SELECTED_CERTIFICATE = "selected_certificate"
 
         fun newInstance(loginSettings: LoginSettings): LoginCredentialsFragment {
             val frag = LoginCredentialsFragment()
@@ -54,7 +54,7 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
             inflater.inflate(R.layout.login_credentials_fragment, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val settings = arguments[ARG_LOGIN_SETTINGS] as LoginSettings
+        val settings = arguments!![ARG_LOGIN_SETTINGS] as LoginSettings
 
         savedInstanceState?.let {
             selectedCertificate = it.getString(SELECTED_CERTIFICATE)
@@ -85,7 +85,7 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
             view.select_certificate.setOnClickListener {
                 KeyChain.choosePrivateKeyAlias(activity, { alias ->
                     alias?.let {
-                        Handler(activity.mainLooper).post {
+                        Handler(requireActivity().mainLooper).post {
                             selectedCertificate = alias
                             certificateSelected()
                         }
@@ -120,10 +120,11 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
 
     private fun certificateSelected() {
         // use selected alias
-        view.select_certificate_info.visibility = View.GONE
-        view.certificate_info.text = getString(R.string.login_managed_config_certificate_selected, selectedCertificate)
-        view.certificate_info.visibility = View.VISIBLE
-        view.login.isEnabled = true
+        val v = requireNotNull(view)
+        v.select_certificate_info.visibility = View.GONE
+        v.certificate_info.text = getString(R.string.login_managed_config_certificate_selected, selectedCertificate)
+        v.certificate_info.visibility = View.VISIBLE
+        v.login.isEnabled = true
     }
 
     private fun validateUsernamePassword(baseURL: URI): LoginInfo? {
@@ -152,18 +153,18 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
 
 
     override fun onCreateLoader(code: Int, args: Bundle?): Loader<Bitmap> {
-        val settings = arguments[ARG_LOGIN_SETTINGS] as LoginSettings
-        return BitmapLoader(activity, settings.logoURL!!)
+        val settings = arguments!![ARG_LOGIN_SETTINGS] as LoginSettings
+        return BitmapLoader(requireActivity(), settings.logoURL!!)
     }
 
-    override fun onLoadFinished(loader: Loader<Bitmap>?, result: Bitmap?) {
+    override fun onLoadFinished(loader: Loader<Bitmap>, result: Bitmap?) {
         view?.logo?.let {
             it.setImageBitmap(result)
             it.visibility = if (result != null) View.VISIBLE else View.GONE
         }
     }
 
-    override fun onLoaderReset(loader: Loader<Bitmap>?) {
+    override fun onLoaderReset(loader: Loader<Bitmap>) {
         view?.logo?.let {
             it.setImageBitmap(null)
             it.visibility = View.GONE

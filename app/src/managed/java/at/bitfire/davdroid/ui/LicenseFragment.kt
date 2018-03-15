@@ -64,7 +64,7 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
     override fun onCreateLoader(code: Int, args: Bundle?) =
             LicenseInfoLoader(activity!!)
 
-    override fun onLoadFinished(loader: Loader<LicenseInfo>?, info: LicenseInfo?) {
+    override fun onLoadFinished(loader: Loader<LicenseInfo>, info: LicenseInfo?) {
         Logger.log.log(Level.INFO, "LICENSE", info)
         view?.let { v ->
             if (info != null && info.valid) {
@@ -87,7 +87,7 @@ class LicenseFragment: Fragment(), LoaderManager.LoaderCallbacks<LicenseInfo> {
         }
     }
 
-    override fun onLoaderReset(loader: Loader<LicenseInfo>?) {
+    override fun onLoaderReset(loader: Loader<LicenseInfo>) {
         onLoadFinished(loader, null)
     }
 

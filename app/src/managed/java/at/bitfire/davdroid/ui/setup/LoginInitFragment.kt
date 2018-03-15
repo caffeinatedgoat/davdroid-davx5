@@ -8,11 +8,11 @@
 
 package at.bitfire.davdroid.ui.setup
 
-import android.app.Fragment
-import android.app.LoaderManager
 import android.content.Context
-import android.content.Loader
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.LoaderManager
+import android.support.v4.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,22 +29,22 @@ class LoginInitFragment: Fragment(), LoaderManager.LoaderCallbacks<LoginSettings
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(R.layout.login_init_fragment, container, false)!!
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         loaderManager.initLoader(0, null, this)
     }
 
-    override fun onCreateLoader(code: Int, args: Bundle?) = LoginSettingsLoader(activity)
+    override fun onCreateLoader(code: Int, args: Bundle?) = LoginSettingsLoader(requireActivity())
 
     override fun onLoadFinished(loader: Loader<LoginSettings>, result: LoginSettings?) {
         result?.let {
             if (it.baseURL != null)
-                fragmentManager.beginTransaction()
+                requireFragmentManager().beginTransaction()
                         .replace(android.R.id.content, LoginCredentialsFragment.newInstance(it))
-                        .commitAllowingStateLoss()
+                        .commit()
         }
     }
 
-    override fun onLoaderReset(loader: Loader<LoginSettings>?) {
+    override fun onLoaderReset(loader: Loader<LoginSettings>) {
     }
 
 

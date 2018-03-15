@@ -188,7 +188,7 @@ class ManagedConfigActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<
 
         override fun onLoadFinished(loader: Loader<String>, error: String?) {
             Toast.makeText(activity, error ?: getString(R.string.managed_config_network_config_url_saved), Toast.LENGTH_LONG).show()
-            dismissAllowingStateLoss()
+            dismiss()
         }
 
     }

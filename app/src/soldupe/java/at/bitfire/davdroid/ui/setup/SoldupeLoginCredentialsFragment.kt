@@ -1,9 +1,9 @@
 package at.bitfire.davdroid.ui.setup
 
 import android.accounts.AccountManager
-import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ class SoldupeLoginCredentialsFragment: Fragment() {
         val accounts = accountManager.getAccountsByType(getString(R.string.account_type))
         if (accounts.isNotEmpty()) {
             // Soldupe account already exists
-            activity.finish()
+            requireActivity().finish()
             startActivity(Intent(activity, AccountsActivity::class.java), null)
         }
 
@@ -35,6 +35,7 @@ class SoldupeLoginCredentialsFragment: Fragment() {
     }
 
     private fun validateLoginData(): LoginInfo? {
+        val view = requireNotNull(view)
         var ok = true
 
         val userName = view.user_name.text.toString()

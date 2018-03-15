@@ -7,7 +7,7 @@
   ~ http://www.gnu.org/licenses/gpl.html
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- common strings -->
     <string name="app_name">Soldupe Sync</string>

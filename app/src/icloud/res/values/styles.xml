@@ -1,38 +1,24 @@
 <resources>
 
-    <!-- colors -->
-    <color name="blue500">#2196f3</color>
-    <color name="blue900">#0d47a1</color>
-    <color name="amberA700">#ffab00</color>
-
-    <!-- preference-v14 uses this color for categories text -->
-    <color name="preference_fallback_accent_color">@color/amberA700</color>
-
-
     <!-- app theme -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
-        <item name="colorPrimary">@color/blue500</item>
-        <item name="colorPrimaryDark">@color/blue900</item>
-        <item name="colorAccent">@color/amberA700</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-    </style>
+    <color name="primaryColor">#2196f3</color>
+    <color name="primaryLightColor">#6ec6ff</color>
+    <color name="primaryDarkColor">#0069c0</color>
+    <color name="secondaryColor">#ffab00</color>
+    <color name="secondaryLightColor">#ffdd4b</color>
+    <color name="secondaryDarkColor">#c67c00</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
 
-    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
+
     <color name="actionBarButton">#FFFFFF</color>
 
 
     <!-- widgets -->
 
-    <style name="tablayout" parent="Base.Widget.Design.TabLayout">
-        <item name="android:background">@color/blue900</item>
-    </style>
-
-    <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/blue900</item>
-        <item name="titleTextColor">@android:color/white</item>
-    </style>
+    <color name="cardview_background">@color/secondaryColor</color>
 
 
     <!-- text content -->

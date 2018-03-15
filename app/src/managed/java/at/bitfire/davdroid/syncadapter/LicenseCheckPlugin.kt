@@ -1,14 +1,13 @@
 package at.bitfire.davdroid.syncadapter
 
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SyncResult
 import android.net.Uri
 import android.support.v4.app.NotificationCompat
+import android.support.v4.app.NotificationManagerCompat
 import at.bitfire.davdroid.App
-import at.bitfire.davdroid.Constants
 import at.bitfire.davdroid.LicenseChecker
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
@@ -22,7 +21,7 @@ import okhttp3.HttpUrl
 class LicenseCheckPlugin: ISyncPlugin {
 
     override fun beforeSync(context: Context, settings: ISettings, syncResult: SyncResult): Boolean {
-        val nm = NotificationUtils.createChannels(context)
+        val nm = NotificationManagerCompat.from(context)
 
         val checker = LicenseChecker(context)
         if (checker.verifyLicense(settings)) {
@@ -52,7 +51,7 @@ class LicenseCheckPlugin: ISyncPlugin {
             return false
         }
 
-        nm.cancel(Constants.NOTIFICATION_SUBSCRIPTION)
+        nm.cancel(NotificationUtils.NOTIFY_LICENSE)
         return true
     }
 
@@ -60,9 +59,8 @@ class LicenseCheckPlugin: ISyncPlugin {
     }
 
 
-    private fun notifyLicenseProblem(context: Context, settings: ISettings, nm: NotificationManager, msgId: Int, subText: String? = null) {
-        val notify = NotificationCompat.Builder(context, NotificationUtils.CHANNEL_SYNC_PROBLEMS)
-                .setLargeIcon(App.getLauncherBitmap(context))
+    private fun notifyLicenseProblem(context: Context, settings: ISettings, nm: NotificationManagerCompat, msgId: Int, subText: String? = null) {
+        val notify = NotificationUtils.newBuilder(context, NotificationUtils.CHANNEL_GENERAL)
                 .setSmallIcon(R.drawable.ic_sync_error_notification)
                 .setContentTitle(context.getString(msgId))
                 .setContentText(context.getString(R.string.license_contact_it_support))
@@ -70,7 +68,6 @@ class LicenseCheckPlugin: ISyncPlugin {
                 .setCategory(NotificationCompat.CATEGORY_ERROR)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, AboutActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
-                .setLocalOnly(true)
 
         settings.getString(App.SUPPORT_PHONE, null)?.let { phone ->
             notify.addAction(R.drawable.ic_phone_dark, context.getString(R.string.license_contact_it_support_phone),
@@ -88,7 +85,7 @@ class LicenseCheckPlugin: ISyncPlugin {
                             .build()), PendingIntent.FLAG_UPDATE_CURRENT))
         }
 
-        nm.notify(Constants.NOTIFICATION_SUBSCRIPTION, notify.build())
+        nm.notify(NotificationUtils.NOTIFY_LICENSE, notify.build())
     }
 
 }

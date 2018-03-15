@@ -152,6 +152,15 @@ class AddAccountTest {
 
     @LargeTest
     @Test
+    fun testSoldupe() = testService(
+            "https://cloud.soldupe.com/remote.php/dav/",
+            "bitfire_test", "frPH27",
+            arrayOf("Kontakte"),
+            arrayOf("Persönlich")
+    )
+
+    @LargeTest
+    @Test
     fun testPosteo() = testService(
             "https://posteo.de:8443",
             "bitfire@posteo.de", "FutFut88",

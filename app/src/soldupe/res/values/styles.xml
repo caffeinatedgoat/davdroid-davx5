@@ -1,31 +1,18 @@
 <resources>
 
     <!-- colors -->
-    <color name="deep_purple300">#9575cd</color>
-    <color name="deep_purple600">#5e35b1</color>
-    <color name="green500">#449d44</color>
-    <color name="grey700">#616161</color>
-    <color name="soldupeGreen">#317433</color>
 
-
-    <!-- preference-v14 uses this color for categories text -->
-    <color name="preference_fallback_accent_color">@color/green500</color>
+    <color name="primaryColor">#745bca</color>
+    <color name="primaryLightColor">#a789fe</color>
+    <color name="primaryDarkColor">#413098</color>
+    <color name="secondaryColor">#307232</color>
+    <color name="secondaryLightColor">#5fa15d</color>
+    <color name="secondaryDarkColor">#004608</color>
 
 
     <!-- app theme -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
-        <item name="colorPrimary">@color/deep_purple300</item>
-        <item name="colorPrimaryDark">@color/deep_purple600</item>
-        <item name="colorAccent">@color/green500</item>
-        <item name="android:textColorPrimary">@drawable/text_color</item>
-        <item name="android:textColorSecondary">@color/grey700</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-    </style>
-
-    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    </style>
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
     <color name="actionBarButton">@android:color/white</color>
 
 
@@ -33,20 +20,20 @@
 
     <style name="account_list_card">
         <item name="android:layout_width">match_parent</item>
-        <item name="cardBackgroundColor">@color/soldupeGreen</item>
+        <item name="cardBackgroundColor">@color/secondaryColor</item>
     </style>
 
 
     <!-- widgets -->
 
-    <color name="cardview_background">@color/soldupeGreen</color>
+    <color name="cardview_background">@color/secondaryColor</color>
 
     <style name="tablayout" parent="Base.Widget.Design.TabLayout">
-        <item name="android:background">@color/soldupeGreen</item>
+        <item name="android:background">@color/secondaryColor</item>
     </style>
 
     <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/soldupeGreen</item>
+        <item name="android:background">@color/secondaryColor</item>
         <item name="titleTextColor">@android:color/white</item>
     </style>
 

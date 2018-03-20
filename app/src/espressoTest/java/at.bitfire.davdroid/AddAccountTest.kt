@@ -77,7 +77,7 @@ class AddAccountTest {
         onView(withText("Welcome to DAVdroid!\n\nYou can add a CalDAV/CardDAV account now.")).check(matches(isDisplayed()))
     }
 
-    private fun testService(baseURL: String?, username: String, password: String, addressBooks: Array<String>, calendars: Array<String>,
+    private fun testService(baseURL: String?, username: String, password: String, addressBooks: Array<String>?, calendars: Array<String>?,
                             accountName: String? = username) {
         onView(withId(R.id.fab)).perform(click())
         Intents.intended(hasComponent(LoginActivity::class.java.name))
@@ -96,14 +96,30 @@ class AddAccountTest {
 
         onData(`is`(Account(accountName, getInstrumentation().targetContext.getString(R.string.account_type))))
                 .perform(click())
-        for (addressBook in addressBooks)
+        for (addressBook in addressBooks.orEmpty())
             onView(withText(containsString(addressBook)))
                     .perform(scrollTo(), click())
-        for (calendar in calendars)
+        for (calendar in calendars.orEmpty())
             onView(withText(containsString(calendar)))
                     .perform(scrollTo(), click())
         onView(withResourceName("sync_now")).perform(click())
     }
+
+    @LargeTest
+    @Test
+    fun testAolCalDAV() = testService(
+            "https://caldav.aol.com", "bit.fire@aol.de", "gaxihure",
+            null,
+            arrayOf("Calendar", "Tasks")
+    )
+
+    @LargeTest
+    @Test
+    fun testAolCardDAV() = testService(
+            "https://carddav.aol.com", "bit.fire@aol.de", "gaxihure",
+            null,
+            arrayOf("Contacts")
+    )
 
     @LargeTest
     @Test
@@ -115,10 +131,18 @@ class AddAccountTest {
 
     @LargeTest
     @Test
+    fun testFruux() = testService(
+            "https://dav.fruux.com", "play@bitfire.at", "FutFut88",
+            arrayOf("Wurst"),
+            arrayOf("Fresh", "tasks")
+    )
+
+    @LargeTest
+    @Test
     fun testICloud() = testService(
             "https://icloud.com",
             "gabriela.stockmann@bezirksblaetter.at", "soks-zisx-ylpr-lkrs",
-            arrayOf(),
+            null,
             arrayOf("Privat", "Erinnerungen"),
             accountName = "gstockmann@me.com"
     )
@@ -130,6 +154,14 @@ class AddAccountTest {
             "davdroid@mailbox.org", "queePh1e",
             arrayOf("Gesammelte Adressen", "Globales Adressbuch", "Kontakte"),
             arrayOf("Kalender", "Aufgaben")
+    )
+
+    @LargeTest
+    @Test
+    fun testMailDe() = testService(
+            null, "davdroid@mail.de", "dd24112014",
+            arrayOf("Alle mail.de Kontakte"),
+            arrayOf("Geschäftlich", "Privat")
     )
 
     @LargeTest

@@ -1,4 +1,4 @@
-package at.bitfire.davdroid;
+package at.bitfire.davdroid
 
 import android.accounts.Account
 import android.accounts.AccountManager
@@ -45,7 +45,7 @@ class AddAccountTest {
 
     @Rule
     @JvmField
-    public val permissionRule = GrantPermissionRule.grant(
+    val permissionRule = GrantPermissionRule.grant(
             android.Manifest.permission.READ_CALENDAR,
             android.Manifest.permission.WRITE_CALENDAR,
             android.Manifest.permission.READ_CONTACTS,

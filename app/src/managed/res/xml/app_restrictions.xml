@@ -46,6 +46,11 @@
         android:description="@string/restriction_support_phone_number_description" />
 
     <restriction
+        android:key="login_introduction"
+        android:restrictionType="string"
+        android:title="@string/restriction_login_introduction"
+        android:description="@string/restriction_login_introduction_description" />
+    <restriction
         android:key="login_base_url"
         android:restrictionType="string"
         android:title="@string/restriction_login_base_url"

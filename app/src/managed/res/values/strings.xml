@@ -32,6 +32,8 @@
     <string name="restriction_support_phone_number">Support phone number</string>
     <string name="restriction_support_phone_number_description">Support phone number (format: +1 234 5678901)</string>
 
+    <string name="restriction_login_introduction">Login introduction message</string>
+    <string name="restriction_login_introduction_description">Message that will be shown when the user adds an account</string>
     <string name="restriction_login_base_url">CalDAV/CardDAV base URL</string>
     <string name="restriction_login_base_url_description">Starting URL for CalDAV/CardDAV service detection</string>
     <string name="restriction_login_user_name">Default user name</string>

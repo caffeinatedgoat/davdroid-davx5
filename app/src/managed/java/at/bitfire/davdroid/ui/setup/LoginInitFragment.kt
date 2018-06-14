@@ -57,6 +57,7 @@ class LoginInitFragment: Fragment(), LoaderManager.LoaderCallbacks<LoginSettings
                     LoginSettings(
                         StringUtils.stripToNull(it.getString(App.ORGANIZATION, null)),
                         StringUtils.stripToNull(it.getString(App.ORGANIZATION_LOGO_URL, null)),
+                        StringUtils.stripToNull(it.getString(LoginSettings.INTRODUCTION, null)),
                         StringUtils.stripToNull(it.getString(LoginSettings.BASE_URL, null)),
                         StringUtils.stripToNull(it.getString(LoginSettings.USER_NAME, null)),
                         StringUtils.stripToNull(it.getString(LoginSettings.CERTIFICATE_ALIAS, null))

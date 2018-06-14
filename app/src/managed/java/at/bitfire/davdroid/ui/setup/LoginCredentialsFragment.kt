@@ -8,23 +8,31 @@
 
 package at.bitfire.davdroid.ui.setup
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
+import android.os.IBinder
 import android.security.KeyChain
 import android.support.v4.app.Fragment
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.AsyncTaskLoader
 import android.support.v4.content.Loader
 import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import at.bitfire.davdroid.HttpClient
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
+import at.bitfire.davdroid.settings.ISettings
+import at.bitfire.davdroid.settings.ISettingsObserver
+import at.bitfire.davdroid.settings.Settings
 import kotlinx.android.synthetic.managed.login_credentials_fragment.view.*
 import okhttp3.Request
 import java.net.URI
@@ -49,6 +57,43 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
 
     private var selectedCertificate: String? = null
 
+    val handler = Handler()
+    val settingsObserver = object: ISettingsObserver.Stub() {
+        override fun onSettingsChanged() {
+            handler.post {
+                activity?.finish()
+            }
+        }
+    }
+
+    private var settingsSvc: ServiceConnection? = null
+    var settings: ISettings? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        settingsSvc = object: ServiceConnection {
+            override fun onServiceConnected(name: ComponentName?, binder: IBinder) {
+                settings = ISettings.Stub.asInterface(binder)
+                settings!!.registerObserver(settingsObserver)
+            }
+
+            override fun onServiceDisconnected(name: ComponentName?) {
+                settings!!.unregisterObserver(settingsObserver)
+                settings = null
+            }
+        }
+        requireActivity().bindService(Intent(context, Settings::class.java), settingsSvc, Context.BIND_AUTO_CREATE)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        settingsSvc?.let {
+            requireActivity().unbindService(it)
+            settingsSvc = null
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(R.layout.login_credentials_fragment, container, false)!!
@@ -60,7 +105,9 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
             selectedCertificate = it.getString(SELECTED_CERTIFICATE)
         }
 
-        view.text.text = Html.fromHtml(getString(R.string.login_managed_config_info_html, settings.organization ?: "DAVdroid"))
+        view.text.text = Html.fromHtml(settings.loginIntroduction ?:
+                getString(R.string.login_managed_config_info_html, settings.organization))
+        view.text.movementMethod = LinkMovementMethod.getInstance()
 
         // load logo
         view.logo.visibility = View.GONE
@@ -102,6 +149,10 @@ class LoginCredentialsFragment: Fragment(), LoaderManager.LoaderCallbacks<Bitmap
             // login by username/password
             view.details_username_password.visibility = View.VISIBLE
             view.details_client_certificate.visibility = View.GONE
+
+            settings.userName?.let {
+                view.user_name.setText(it)
+            }
 
             view.login.isEnabled = true
             view.login.setOnClickListener {

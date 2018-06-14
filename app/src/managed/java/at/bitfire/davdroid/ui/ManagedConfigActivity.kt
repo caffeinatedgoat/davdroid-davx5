@@ -9,12 +9,14 @@
 package at.bitfire.davdroid.ui
 
 import android.app.Dialog
-import android.app.DialogFragment
-import android.app.LoaderManager
 import android.app.ProgressDialog
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
+import android.support.v4.app.DialogFragment
+import android.support.v4.app.LoaderManager
+import android.support.v4.content.AsyncTaskLoader
+import android.support.v4.content.Loader
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -55,10 +57,10 @@ class ManagedConfigActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<
 
         if (savedInstanceState == null)
             intent?.dataString?.let {
-                SetConfigUrlFragment.newInstance(it).show(fragmentManager, null)
+                SetConfigUrlFragment.newInstance(it).show(supportFragmentManager, null)
             }
 
-        loaderManager.initLoader(0, null, this)
+        supportLoaderManager.initLoader(0, null, this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,7 +95,7 @@ class ManagedConfigActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<
                 .remove(NetworkConfigProvider.PREF_CONFIG_URL)
                 .remove(NetworkConfigProvider.PREF_CACHED_CONFIG)
                 .apply()
-        loaderManager.restartLoader(0, null, this)
+        supportLoaderManager.restartLoader(0, null, this)
     }
 
 
@@ -155,7 +157,7 @@ class ManagedConfigActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<
 
         companion object {
 
-            private val ARG_URL = "url"
+            private const val ARG_URL = "url"
 
             fun newInstance(url: String): DialogFragment {
                 val args = Bundle(1)
@@ -175,13 +177,13 @@ class ManagedConfigActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val dialog = ProgressDialog(activity)
             dialog.setCancelable(false)
-            dialog.setMessage(activity.getString(R.string.managed_config_verifying_network_config))
+            dialog.setMessage(requireActivity().getString(R.string.managed_config_verifying_network_config))
             isCancelable = false
             return dialog
         }
 
-        override fun onCreateLoader(code: Int, args: Bundle): Loader<String> =
-                VerifyNetworkConfigLoader(activity, args.getString(ARG_URL))
+        override fun onCreateLoader(code: Int, args: Bundle?): Loader<String> =
+                VerifyNetworkConfigLoader(requireActivity(), args!!.getString(ARG_URL))
 
         override fun onLoaderReset(loader: Loader<String>) {
         }

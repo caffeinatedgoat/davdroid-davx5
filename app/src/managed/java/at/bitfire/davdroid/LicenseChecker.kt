@@ -28,8 +28,8 @@ class LicenseChecker(
 ) {
 
     companion object {
-        val SETTING_LICENSE = "license"
-        val SETTING_LICENSE_SIGNATURE = "license_signature"
+        const val SETTING_LICENSE = "license"
+        const val SETTING_LICENSE_SIGNATURE = "license_signature"
     }
 
     private val publicKey: PublicKey

@@ -20,13 +20,6 @@ data class LoginSettings(
         var certificateAlias: String?
 ): Parcelable {
 
-    companion object {
-        const val INTRODUCTION = "login_introduction"
-        const val BASE_URL = "login_base_url"
-        const val USER_NAME = "login_user_name"
-        const val CERTIFICATE_ALIAS = "login_certificate_alias"
-    }
-
     constructor(parcel: Parcel): this(
             parcel.readString(),
             parcel.readString(),
@@ -46,8 +39,12 @@ data class LoginSettings(
 
     override fun describeContents() = 0
 
-    @JvmField
-    val CREATOR = object: Parcelable.Creator<LoginSettings> {
+    companion object CREATOR : Parcelable.Creator<LoginSettings> {
+
+        const val INTRODUCTION = "login_introduction"
+        const val BASE_URL = "login_base_url"
+        const val USER_NAME = "login_user_name"
+        const val CERTIFICATE_ALIAS = "login_certificate_alias"
 
         override fun createFromParcel(parcel: Parcel) = LoginSettings(parcel)
         override fun newArray(size: Int) = arrayOfNulls<LoginSettings?>(size)

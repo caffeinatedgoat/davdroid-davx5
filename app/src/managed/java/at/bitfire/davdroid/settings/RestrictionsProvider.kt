@@ -77,16 +77,16 @@ class RestrictionsProvider(
     }
 
     override fun getBoolean(key: String) =
-            getValue(key, { config -> config.getBoolean(key) })
+            getValue(key) { config -> config.getBoolean(key) }
 
     override fun getInt(key: String) =
-            getValue(key, { config -> config.getInt(key) })
+            getValue(key) { config -> config.getInt(key) }
 
     override fun getLong(key: String) =
-            getValue(key, { config -> config.getLong(key) })
+            getValue(key) { config -> config.getLong(key) }
 
     override fun getString(key: String) =
-            getValue(key, { config -> config.getString(key) })
+            getValue(key) { config -> config.getString(key) }
 
 
     override fun isWritable(key: String) =

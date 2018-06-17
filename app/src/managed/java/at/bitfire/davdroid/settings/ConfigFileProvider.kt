@@ -82,16 +82,16 @@ class ConfigFileProvider(
                 Pair(null, true)
 
     override fun getBoolean(key: String) =
-            getValue(key, { json -> json.getBoolean(key) })
+            getValue(key) { json -> json.getBoolean(key) }
 
     override fun getInt(key: String) =
-            getValue(key, { json -> json.getInt(key) })
+            getValue(key) { json -> json.getInt(key) }
 
     override fun getLong(key: String) =
-            getValue(key, { json -> json.getLong(key) })
+            getValue(key) { json -> json.getLong(key) }
 
     override fun getString(key: String) =
-            getValue(key, { json -> json.getString(key) })
+            getValue(key) { json -> json.getString(key) }
 
     override fun isWritable(key: String) = Pair(false, !(json?.has(key) == true))
     override fun putBoolean(key: String, value: Boolean?) = false

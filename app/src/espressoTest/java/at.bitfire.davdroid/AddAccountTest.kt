@@ -105,7 +105,7 @@ class AddAccountTest {
         onView(withResourceName("sync_now")).perform(click())
     }
 
-    @LargeTest
+    /*@LargeTest
     @Test
     fun testAolCalDAV() = testService(
             "https://caldav.aol.com", "bit.fire@aol.de", "gaxihure",
@@ -198,6 +198,6 @@ class AddAccountTest {
             "bitfire@posteo.de", "FutFut88",
             arrayOf("default addressbook"),
             arrayOf("Wurstkalender", "wawa")
-    )
+    )*/
 
 }

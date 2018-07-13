@@ -24,6 +24,9 @@
     <string name="startup_opentasks_not_installed_message">The OpenTasks app is not available, so Soldupe Sync won\'t be able to synchronize task lists.</string>
     <string name="startup_opentasks_reinstall_davdroid">After installing OpenTasks, you have to RE-INSTALL Soldupe Sync and add your accounts again (Android bug).</string>
 
+    <!-- AboutActivity -->
+    <string name="about_flavor_info">This version was built for Soldupe Cloud Services (Beamy Lake GmbH).</string>
+
     <!-- global settings -->
     <string name="logging_davdroid_file_logging">Soldupe Sync file logging</string>
 

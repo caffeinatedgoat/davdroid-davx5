@@ -12,11 +12,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <View android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:layout_marginBottom="8dp"
-          android:background="?android:attr/dividerVertical" />
-
     <TextView
        android:id="@+id/license_info"
        android:layout_width="match_parent"
@@ -24,7 +19,6 @@
        android:layout_marginBottom="8dp"
        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
        android:text="@string/about_license_info_html"/>
-
 
     <TextView
         android:id="@+id/license_domains"

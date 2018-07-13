@@ -7,6 +7,8 @@
   <string name="startup_battery_optimization_message">Android kann die Soldupe Sync-Synchronisierung in ein paar Tagen reduzieren/deaktivieren. Um dies zu verhindern, muss die Akku-Leistungsoptimierung deaktiviert werden.</string>
   <string name="startup_battery_optimization_disable">Für Soldupe Sync deaktivieren</string>
   <string name="startup_opentasks_reinstall_davdroid">Nach der Installation von OpenTasks muss Soldupe Sync NEU INSTALLIERT und die Konten neu hinzugefügt werden (Android-Bug).</string>
+  <!-- AboutActivity -->
+  <string name="about_flavor_info">Diese Version wurde für Soldupe Cloud Services (Beamy Lake GmbH) erstellt.</string>
   <!--global settings-->
   <string name="logging_davdroid_file_logging">Soldupe Sync Datei-Protokollierung</string>
   <!--AccountsActivity-->
